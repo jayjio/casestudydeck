@@ -357,22 +357,20 @@ const handleSubmit = async () => {
   --tag-corner-rad: 60px;
   
   background-color: var(--bg-color);
-  min-height: 100vh;
   width: 100%;
-  position: relative;
   font-family: 'Rethink Sans', sans-serif;
   padding: 40px 20px;
+  overflow: visible;
 }
 
 /* Main Content */
 .main-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 0;
   overflow: visible;
-  min-height: 100vh;
 }
 
 .cta-section {
@@ -462,9 +460,9 @@ const handleSubmit = async () => {
 
 /* CTA Button */
 .cta-button {
-  background-color: var(--white-color);
-  border: none;
-  border-radius: var(--inner-corner-radius);
+  background-color: transparent;
+  border: 2px solid var(--white-color);
+  border-radius: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -473,12 +471,13 @@ const handleSubmit = async () => {
   height: 100%;
   width: 154px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .cta-button:hover {
+  background-color: rgba(252, 243, 234, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(252, 243, 234, 0.2);
 }
 
 .cta-button:active {
@@ -490,14 +489,14 @@ const handleSubmit = async () => {
   font-weight: 600;
   font-size: 18px;
   line-height: normal;
-  color: var(--panel-bg-color);
+  color: var(--white-color);
   white-space: nowrap;
 }
 
 .arrow-icon {
   width: 17.5px;
   height: 13.5px;
-  color: var(--panel-bg-color);
+  color: var(--white-color);
 }
 
 /* Error Message */
