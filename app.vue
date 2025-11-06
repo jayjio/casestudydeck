@@ -19,7 +19,7 @@
     <!-- Main Content -->
     <main class="main-content">
       <!-- CTA Section -->
-      <div class="cta-section">
+      <div ref="ctaSectionRef" class="cta-section">
         <div class="cta-container">
           <!-- Text Field with Floating Label -->
           <div
@@ -32,7 +32,7 @@
               class="floating-label"
               :class="{ 'floating': isFocused || inputValue }"
             >
-              Ask me anything...
+              {{ placeholderText }}
             </label>
             <input
               id="welcome-input"
@@ -40,8 +40,9 @@
               v-model="inputValue"
               type="text"
               class="text-input"
+              autocomplete="off"
               @focus="isFocused = true"
-              @blur="isFocused = false"
+              @blur="setTimeout(() => isFocused = false, 200)"
               @keyup.enter="handleSubmit"
             />
           </div>
@@ -52,8 +53,20 @@
             @click="handleSubmit"
             :disabled="isLoading"
           >
-            <span class="cta-text">{{ isLoading ? 'Thinking...' : 'Show me what ya got' }}</span>
+            <span class="cta-text">Ask</span>
             <img v-if="!isLoading" :src="unionSvg" alt="" class="arrow-icon" />
+          </button>
+        </div>
+
+        <!-- Suggested Queries (Outside container) -->
+        <div v-if="isFocused && !inputValue" class="suggested-queries">
+          <button
+            v-for="(query, index) in suggestedQueries"
+            :key="index"
+            class="suggested-query-item"
+            @click.prevent="selectSuggestedQuery(query)"
+          >
+            {{ query }}
           </button>
         </div>
 
@@ -61,24 +74,60 @@
         <div v-if="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
+      </div>
 
-        <!-- AI Response Display -->
-        <div v-if="aiResponse" class="response-container">
-          <div class="response-header">
-            <span class="response-label">AI Response:</span>
-          </div>
-          <div class="response-content">
-            {{ aiResponse }}
-          </div>
+      <!-- Loading Animation -->
+      <div v-if="showLoading" ref="loadingRef" class="loading-container">
+        <svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fogGradient1" cx="30%" cy="30%">
+              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" />
+              <stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" />
+              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+            </radialGradient>
+            <radialGradient id="fogGradient2" cx="70%" cy="60%">
+              <stop offset="0%" stop-color="rgba(252, 243, 234, 0.12)" />
+              <stop offset="60%" stop-color="rgba(252, 243, 234, 0.03)" />
+              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+            </radialGradient>
+            <radialGradient id="fogGradient3" cx="50%" cy="80%">
+              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" />
+              <stop offset="50%" stop-color="rgba(255, 255, 255, 0.02)" />
+              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+            </radialGradient>
+            <radialGradient id="centerGlow">
+              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" />
+              <stop offset="70%" stop-color="rgba(255, 255, 255, 0)" />
+            </radialGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" />
+          <circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" />
+          <circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" />
+          <circle cx="60" cy="60" r="40" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" />
+        </svg>
+        <p class="loading-text">{{ currentLoadingMessage }}</p>
+      </div>
+
+      <!-- AI Response Display (Outside CTA Section) -->
+      <div v-if="aiResponse" ref="responseContainerRef" class="response-container-main">
+        <div class="response-header">
+          <span class="response-label">{{ lastQuery }}</span>
         </div>
-
-        <!-- Subtitle -->
-        <p class="subtitle">"Ask questions and get AI-powered answers"</p>
+        <div class="response-content">
+          {{ aiResponse }}
+        </div>
       </div>
     </main>
 
     <!-- Fixed Footer Cards -->
-    <footer class="footer-cards">
+    <footer ref="footerCardsRef" class="footer-cards">
       <div 
         v-for="(card, index) in cards" 
         :key="index" 
@@ -94,7 +143,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
+import gsap from 'gsap'
 
 // State
 const isFocused = ref(false)
@@ -103,13 +153,55 @@ const inputRef = ref<HTMLInputElement | null>(null)
 const isLoading = ref(false)
 const aiResponse = ref('')
 const errorMessage = ref('')
+const lastQuery = ref('')
+const hasSearched = ref(false)
+const loadingMessageIndex = ref(0)
+
+// Loading messages that cycle through
+const loadingMessages = [
+  'Analyzing my life choices..parsing all mistakes..',
+  'Is this a fake loading animation and just static content? Who can say',
+  'Please be patient, this is in fact my first rodeo'
+]
+
+// Computed current loading message
+const currentLoadingMessage = computed(() => {
+  return loadingMessages[loadingMessageIndex.value % loadingMessages.length]
+})
+
+// Computed placeholder text
+const placeholderText = computed(() => {
+  return (isFocused.value || inputValue.value) 
+    ? 'You can use a suggested question (lame) or ask your own (cool)'
+    : 'Want to get to know each other better? Ask me anything'
+})
+
+// Suggested queries
+const suggestedQueries = [
+  'What\'s your experience and background?',
+  'What tools do you use?',
+  'What are you working on right now?',
+  'What do you value as a designer?',
+  'What do you do outside of work?',
+  'Gimme a random *random* fact'
+]
+
+// Animation refs
+const ctaSectionRef = ref<HTMLElement | null>(null)
+const subtitleRef = ref<HTMLElement | null>(null)
+const footerCardsRef = ref<HTMLElement | null>(null)
+const responseContainerRef = ref<HTMLElement | null>(null)
+const loadingRef = ref<HTMLElement | null>(null)
+
+// Loading state for animation
+const showLoading = ref(false)
 
 // Assets
 const logoSvg = 'http://localhost:3845/assets/5ecfc65b94c99655e8018db51dab82c756153dec.svg'
 const unionSvg = 'http://localhost:3845/assets/4c2f52c3b15a0cff28bb335d3e8604a66fcf8aa6.svg'
 
-// Default AI model
-const selectedModel = 'gpt-4'
+// Default AI model (Claude)
+const selectedModel = 'claude-sonnet-4-20250514'
 
 // Cards data
 const cards = [
@@ -123,7 +215,101 @@ const cards = [
 
 // Methods
 const focusInput = () => {
+  // If user has already searched and clicks back in, clear everything
+  if (hasSearched.value) {
+    inputValue.value = ''
+    aiResponse.value = ''
+    lastQuery.value = ''
+    hasSearched.value = false
+  }
   inputRef.value?.focus()
+}
+
+const selectSuggestedQuery = (query: string) => {
+  inputValue.value = query
+  handleSubmit()
+}
+
+// GSAP Animation
+const animateCtaOut = () => {
+  const timeline = gsap.timeline({
+    onComplete: () => {
+      // Show loading animation after CTA slides up
+      showLoading.value = true
+      nextTick(() => {
+        animateLoadingIn()
+      })
+    }
+  })
+
+  // Animate CTA section up (to top of viewport)
+  timeline.to(ctaSectionRef.value, {
+    y: -64,
+    duration: 0.8,
+    ease: 'power2.inOut'
+  })
+
+  // Animate footer cards with stagger
+  if (footerCardsRef.value) {
+    const cards = footerCardsRef.value.querySelectorAll('.card')
+    timeline.to(cards, {
+      y: '150%',
+      duration: 0.7,
+      ease: 'power2.inOut',
+      stagger: 0.1 // 0.1s delay between each card
+    }, '<0.2') // Start 0.2s after the CTA animation begins
+  }
+}
+
+// Animate loading in
+const animateLoadingIn = () => {
+  if (loadingRef.value) {
+    gsap.fromTo(loadingRef.value,
+      {
+        opacity: 0,
+        y: 30
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out'
+      }
+    )
+  }
+}
+
+// Animate loading out
+const animateLoadingOut = () => {
+  if (loadingRef.value) {
+    gsap.to(loadingRef.value, {
+      opacity: 0,
+      y: -30,
+      duration: 0.4,
+      ease: 'power2.in',
+      onComplete: () => {
+        showLoading.value = false
+      }
+    })
+  }
+}
+
+// Animate response in
+const animateResponseIn = () => {
+  if (responseContainerRef.value) {
+    gsap.fromTo(responseContainerRef.value,
+      {
+        opacity: 0,
+        y: 55
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      }
+    )
+  }
 }
 
 const handleSubmit = async () => {
@@ -132,11 +318,25 @@ const handleSubmit = async () => {
     return
   }
 
+  // Store the query for display
+  lastQuery.value = inputValue.value
+
+  // Increment loading message index for next time
+  loadingMessageIndex.value++
+
+  // Trigger animation
+  animateCtaOut()
+
   isLoading.value = true
   errorMessage.value = ''
   aiResponse.value = ''
 
   try {
+    console.log('Sending request to API with:', {
+      message: inputValue.value,
+      model: selectedModel
+    })
+    
     const response = await $fetch('/api/chat', {
       method: 'POST',
       body: {
@@ -144,15 +344,45 @@ const handleSubmit = async () => {
         model: selectedModel
       }
     })
+    
+    console.log('Received response from API:', response)
 
     if (response.success) {
       aiResponse.value = response.response
+      hasSearched.value = true
+      // Hide loading and show response
+      animateLoadingOut()
+      // Wait for loading to finish animating out
+      setTimeout(async () => {
+        await nextTick()
+        animateResponseIn()
+      }, 400)
     } else {
       errorMessage.value = 'Failed to get response from AI'
+      animateLoadingOut()
     }
   } catch (error: any) {
     console.error('Error calling API:', error)
-    errorMessage.value = error.data?.statusMessage || error.message || 'An error occurred. Please check your API key configuration.'
+    
+    // Better error handling and logging
+    const errorMsg = error?.data?.statusMessage || error?.message || 'An error occurred'
+    console.error('Full error details:', {
+      status: error?.status,
+      statusCode: error?.statusCode,
+      data: error?.data,
+      message: error?.message
+    })
+    
+    errorMessage.value = errorMsg
+    animateLoadingOut()
+    
+    // Reset CTA section visibility so user can try again
+    setTimeout(() => {
+      if (ctaSectionRef.value) {
+        gsap.set(ctaSectionRef.value, { display: 'flex', y: 0 })
+      }
+      inputValue.value = ''
+    }, 500)
   } finally {
     isLoading.value = false
   }
@@ -234,14 +464,17 @@ const handleSubmit = async () => {
 /* Main Content */
 .main-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   padding: 0 20px;
   margin-top: 100px;
+  overflow: visible;
+  min-height: calc(100vh - 100px);
 }
 
 .cta-section {
-  width: 908px;
+  width: 817px;
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -257,7 +490,7 @@ const handleSubmit = async () => {
   align-items: center;
   padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
   width: 100%;
-  height: 144px;
+  height: 92px;
 }
 
 /* Text Field with Floating Label */
@@ -270,19 +503,22 @@ const handleSubmit = async () => {
   position: relative;
   cursor: text;
   transition: border-color 0.3s ease;
+  background: transparent;
+  overflow: visible;
 }
 
 .text-field-open.is-focused {
   border-color: #4a4d5a;
+  background: transparent;
 }
 
 .floating-label {
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 600;
-  font-size: 26px;
+  font-weight: 500;
+  font-size: 18px;
   line-height: normal;
   color: white;
-  white-space: nowrap;
+  white-space: normal;
   position: absolute;
   left: var(--textfield-padding-lr);
   top: 50%;
@@ -290,6 +526,7 @@ const handleSubmit = async () => {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   transform-origin: left center;
+  width: calc(100% - (var(--textfield-padding-lr) * 2));
 }
 
 .floating-label.floating {
@@ -302,16 +539,17 @@ const handleSubmit = async () => {
 
 .text-input {
   width: 100%;
-  height: 100%;
+  height: 40px;
   background: transparent;
   border: none;
   outline: none;
   font-family: 'Rethink Sans', sans-serif;
   font-weight: 600;
-  font-size: 26px;
-  line-height: normal;
+  font-size: 16px;
+  line-height: 40px;
   color: white;
-  padding-top: 24px;
+  padding: 0;
+  margin-top: -8px;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -328,10 +566,10 @@ const handleSubmit = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 24px;
   padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
   height: 100%;
-  width: 282px;
+  width: 154px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -347,7 +585,7 @@ const handleSubmit = async () => {
 
 .cta-text {
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 18px;
   line-height: normal;
   color: var(--panel-bg-color);
@@ -384,6 +622,125 @@ const handleSubmit = async () => {
   animation: fadeIn 0.3s ease-in;
 }
 
+.response-container-main {
+  width: 817px;
+  max-width: 100%;
+  background-color: var(--panel-bg-color);
+  border: 1px solid var(--text-field-stroke-color);
+  border-radius: var(--panel-corner-radius);
+  padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
+  margin-top: -26px;
+}
+
+/* Loading Animation */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: -40px;
+  padding: 40px;
+  width: 100%;
+}
+
+.loading-spinner {
+  width: 120px;
+  height: 120px;
+  animation: rhythmicPulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.fog-layer-1 {
+  animation: foggyRotate1 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.fog-layer-2 {
+  animation: foggyRotate2 10s ease-in-out infinite reverse;
+  transform-origin: center;
+}
+
+.fog-layer-3 {
+  animation: foggyRotate3 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.center-glow {
+  animation: innerGlow 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes rhythmicPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1.02);
+    opacity: 0.7;
+  }
+  60% {
+    transform: scale(1.02);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.4;
+  }
+}
+
+@keyframes foggyRotate1 {
+  0%, 100% {
+    transform: rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+}
+
+@keyframes foggyRotate2 {
+  0%, 100% {
+    transform: rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(-120deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes foggyRotate3 {
+  0%, 100% {
+    transform: rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(90deg);
+    opacity: 1;
+  }
+}
+
+@keyframes innerGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.15);
+  }
+}
+
+.loading-text {
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #ffffff;
+  opacity: 1;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -410,8 +767,8 @@ const handleSubmit = async () => {
 
 .response-content {
   font-family: 'Rethink Sans', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
+  font-weight: 300;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--white-color);
   white-space: pre-wrap;
@@ -452,7 +809,7 @@ const handleSubmit = async () => {
   align-items: center;
   padding: 20px;
   background: linear-gradient(to top, var(--bg-color) 80%, transparent);
-  overflow-x: auto;
+  overflow: hidden;
   z-index: 100;
 }
 
@@ -502,6 +859,44 @@ const handleSubmit = async () => {
   letter-spacing: 1.4px;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+/* Suggested Queries */
+.suggested-queries {
+  width: 100%;
+  background-color: var(--panel-bg-color);
+  border: 1px solid var(--text-field-stroke-color);
+  border-radius: var(--inner-corner-radius);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 11px;
+  animation: fadeIn 0.2s ease-in;
+}
+
+.suggested-query-item {
+  background-color: transparent;
+  border: 1px solid var(--text-field-stroke-color);
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--white-color);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.suggested-query-item:hover {
+  background-color: rgba(252, 243, 234, 0.05);
+  border-color: #4a4d5a;
+  transform: translateX(4px);
+}
+
+.suggested-query-item:active {
+  transform: translateX(2px);
 }
 
 /* Responsive adjustments */

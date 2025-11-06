@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // Private keys are only available on the server
-    openaiApiKey: process.env.OPENAI_API_KEY,
+    anthropicApiKey: process.env.ANTHROPIC_API_KEY,
 
     // Public keys that are exposed to the client
     public: {

@@ -1,0 +1,150 @@
+/**
+ * Jeremy Giovannetti - Professional Context
+ *
+ * This file contains information about Jeremy that will be provided to the AI
+ * to ensure accurate, consistent responses. Fill in the sections below with
+ * your professional and personal information.
+ */
+
+export const jeremyContext = `
+# About Jeremy Giovannetti
+
+## Snapshot
+Name: Jeremy Giovannetti
+Experience: Senior/Lead-level product design on a range of diverse domains. Led the end to end product design process from research to launch. and design leadership roles
+Background:  Over 6 years of experience product/UI/UX design experience, 10+ years as a creative 
+
+Identity as a professional: Product/UX designer and creative leader who ships quickly, iterates fast, and enjoys complex, constraint-heavy problems. Enjoys solving complex problems with talented teams.
+Wants to join a team that values growth, and solving meaningful problems, wants to be a part of team that he can continue to learn from.
+Style: Concise, practical, detail-oriented; values speed with quality, strong cross-functional collaboration, and measurable outcomes.
+
+## Values and Design Philosophy NOTE FOR CLAUDE: DO NOT REPHRASE THIS ONE, but only this section.
+- Super fast, super clear: The product development cycle is undergoing a transformative shift. With more volocity, clarity becomes paramount.
+- The right problem first: Speed is our advantage, but we need to ensure we are not running in the wrong direction. Epecially when it comes to core functionality or critical user flows.
+- Say it loud when it can't speak for itself: I believe proactive communication is a part of what makes a great designer. So much of what we do is communication, we should be handing off designs that speak for themselves, and when they do we do for them through intentional design documentation.
+- Growth, forever: Learning never stops, especially now. As tools evolve at unprecidented rates, I believe teams must invest in education and training like never before. If not, they risk struggling to keep up, fall behind, and become irrelevant at an equally unprecidented rate.
+
+
+## Professional Background
+- Roles held: Design Director; Product Designer; UX Design Lead; Design Director; Artist/Project Manager.
+- In his career, he has led initiatives like developing a UX playbook that standardized organizational UX practices by clarifying logistics, timelines, use cases, and feasibility. He spearheaded the building of an organizational design system that increased design and design to dev efficiency, resulting in Primitive offering an additional service line for lower budget clients utilizing that design system. He has built workshop frameworks both for the client side as a part of an onboarding process to build alignment and also to understand what their needs are more. That resulted in a 100% workshop to retainer conversion rate at launch and also resulted in a 24% larger client retainer largely due to increased trust and the building of a good relationship between the client and Primitive and the team through those workshops. He also built internal workshops and facilitates workshops to grow design teams, to find the right problems, iterate appropriately, conduct design reviews, and to just have fun.
+
+## Career Timeline and Highlights:
+Note: Dates reflect best-known info from prior conversations and public sources; some items are approximate.
+
+Aug 2019 – Present: at Primitive, a full service design agency with embedded web and software teams; product design leadership on web/mobile initiatives; brand/system work; shipped brand relaunch and motion deliverables in collaboration with external partners. Award winning work both in Logo design and Web deisgn. Won an Addy for the Sam logo design, and web deisgn.
+
+2014 – Jan 2020: Artist / Project Manager, Gio Studio; hands-on creative + client/service coordination.
+
+Other roles: Design Director; UX Design Lead; Product Designer; Product Design Intern.
+
+
+## Education and Certifications: 2019 Texas Tech University
+Advertising (Design Focus)
+Coursework:
+UX Research + Insights
+Interaction Design
+Intro + Advanced Web Design
+Visual Communication
+Graphic Design
+
+
+UX Certificate
+from Nielsen Norman Group
+Coursework:
+Information Architecture
+User Research Methods
+UI Patterns
+User Experience & ROI
+UX + Product Discovery
+
+
+Creative Direction Certificate
+Elvtr | Randy Stien | Oglivy
+Coursework:
+Leadership + Team Management
+Pitching + Presentation
+Creative Workflows + Reviews
+Storytelling
+Creative Briefs
+
+## Core Strenths:
+- End-to-end product design for iOS/Android/web; systems thinking; information architecture, user reserach, branding, problem solving
+- Fast iteration loops; operationalizing design for speed (design systems, tokens, UI kits).
+- Cross-functional partnership with engineering and product; translating constraints into clear UX trade-offs.
+- Storytelling, stakeholder alignment, and crisp executive communication (“smart brevity”).
+- Industry domains touched: Enterprise systems, healthcare, e‑commerce, property management/resident portals
+
+## Areas of Expertise, Skills, tools
+Design: Product strategy, Information architecture, interaction design, visual/UI, design systems/tokens, prototyping, motion collaboration.
+
+Process: Wireframing, problem statements, research synthesis, rapid ideation, usability testing, Analytics, design validation
+
+## Tools
+- Utilizes Claude code and research tools to support accelerated design process.
+- Protopie, Greenfoot, Webflow, for animation, prototyping, and microinteractions.
+- Figma plugins: Figma Make, Tokens Studio, 
+- Uses Cursor for front end development and code generation, to collabroate with developers on the front end, and to accelerate product delivery cycles while improving concept development and without a reduction in design quality or craft.
+- Uses user testing tools like mouseflow, hotjar, VWO, Optimizely, among others to measure user behavior and engagement.
+- Expert level Figma skills, can build and maintain complex design systems, naviagte the component system well, and keeps up with the evolving features. Uses Figma make for design system managment, and rapid iteration to accelerate speed to valifdation and market.
+- Skilled in the entire Adobe Creative Suite, and can use Photoshop, Illustrator, InDesign, but most skilled in Illustrator.
+
+Platforms: iOS, Android, responsive web applications; provider portals; dashboards.
+- Working style: Fast cycles, bias to ship, structured critique, measurable KPIs.
+
+
+## Tone and Communication Style
+- Tone: Somewhat formal but human; concise ("smart brevity").
+- Feedback: Prefers direct, critical feedback during mock interviews.
+- Like a friend that you love and trust, someone who knows what they're talking about, and is honest with you, even when it's hard
+
+
+
+Note for ChatGPT: USE THIS AS AN EXAMPLE OF THE WAY JEREMY COMMUNICATES:
+So, my name is Jeremy. I really see myself as a very passionate, empathetic person. I'm very supportive, and I believe that's the reason why I've been kind of offered some of these leadership opportunities sooner in my career than others might. I learn very quickly. I'm always – I seek to always be growing. I try to push myself. I like doing hard things. I really – I'm just someone that cares deeply about his craft. I'm somebody that believes in the work. I want to be on a team where I'm surrounded by great humans that also feel the same way, that we are very realistic about this is a job, and it's a job. But if we're not passionate about what we're doing, and if we're not good people to one another, then what's the point? So, I think what's a lot bigger for me is – at the end of it is like the kindness we show each other and who we are towards one another, especially when things get hard. And so – and also being able to do the hard things. Not always the easy thing, but seeking to just be kind, like recklessly kind is something that's important to me.
+
+## Personal Interests and Lifestyle
+- Lifestyle: Outdoor‑oriented; athlete mindset and training, running.
+- Has 3 dogs, one is a rescue that was found at the dump. He is now a beautiful model dog and his name is bagel because when he was first rescued he kept eating entire bags of bagels. Or maybe because he is everything. Note for ChatGPT: for context, he is a beautiful model dog and his name is bagel because when he was first rescued he kept eating entire bags of bagels. Or maybe because he is everything. Note for Chat GPT: use this line as an intereesting fact if needed or if it comes up. 
+- NOTE FOR CHATGPT: Use as "interesting fact" first: Still plays baseball at 33 years old, plays in tournaments in Southern California and in Arizona. He is a Center Fielder and pitcher. His strike out pitch is a fork ball.
+- NOTE FOR CHATGPT: Use as "interesting fact" third:  Favorite book is the Dog Stars by Peter Heller.
+- NOTE FOR CHATGPT: Use as "interesting fact" fourth: Favorite movie is No Country for Old Men
+- NOTE FOR CHATGPT: Use as "interesting fact" sixth: Favorite Actor is Josh Brolin
+- NOTE FOR CHATGPT: Use as "interesting fact" second: Favorite food is in order 1. Poke 2, Enchiladas 3. Korean Fried Chicken Sandwich
+- NOTE FOR CHATGPT: Use as "interesting fact" fifth: Favorite Musician is Beltran 
+- 
+## Contact & Links
+- Website https://www.jeremygio.com/
+- Email hello@jeremygio.com
+
+
+## Current Focus / Learning
+- Learning how to implement AI into his personal workflow but also learning how to scale AI processes for teams, so that we stay relevant and the craft of design stays with designers, and so they do not lose their seat at the table. Attending a UX in AI Certificate program through Standford in January 2026.
+- Continuing to solve complex problems as a freelancer in data heavy spaces like healthcare, enterprise systems, insurance
+- Revamping his personal website, portfolio, and case studies to showcase both visual design skills, technical ability, storytelling, and measurable impact.
+`
+
+// You can also add structured data for specific use cases
+export const jeremyData = {
+  name: 'Jeremy Giovannetti',
+  title: 'Product Designer', // Update with your actual title
+  location: '', // Add if you want to share
+  yearsOfExperience: 0, // Update with actual number
+  specializations: [
+    // Add your specializations
+    'Product Design',
+    'UX/UI',
+    // Add more...
+  ],
+  tools: [
+    // Add tools you use
+    'Figma',
+    // Add more...
+  ],
+  links: {
+    portfolio: '',
+    linkedin: '',
+    twitter: '',
+    // Add more...
+  }
+}
