@@ -38,7 +38,9 @@
             :disabled="isLoading"
           >
             <span class="cta-text">Ask</span>
-            <img v-if="!isLoading" :src="unionSvg" alt="" class="arrow-icon" />
+            <svg v-if="!isLoading" class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
         </div>
 
@@ -163,9 +165,6 @@ const loadingRef = ref<HTMLElement | null>(null)
 
 // Loading state for animation
 const showLoading = ref(false)
-
-// Assets
-const unionSvg = 'http://localhost:3845/assets/4c2f52c3b15a0cff28bb335d3e8604a66fcf8aa6.svg'
 
 // Default AI model (Claude)
 const selectedModel = 'claude-sonnet-4-20250514'
@@ -498,6 +497,7 @@ const handleSubmit = async () => {
 .arrow-icon {
   width: 17.5px;
   height: 13.5px;
+  color: var(--panel-bg-color);
 }
 
 /* Error Message */
