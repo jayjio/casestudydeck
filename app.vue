@@ -4,7 +4,7 @@
     <main class="main-content">
       <!-- CTA Section -->
       <div ref="ctaSectionRef" class="cta-section">
-        <h1 class="section-title">Get to know not really me</h1>
+        <h1 class="section-title">Get to know [not really] me</h1>
         <p class="section-description">This is an interactive tool I built using Figma and the MCP Server, Claude Code, Claude API, and Cursor. It's essentially an AI agent that utilizes a context doc to answer questions about my experience, my work, and what I care about.</p>
         <p class="section-description">If you would like to hear the process and tool stack in more detail, click the first suggested question below!</p>
         <div class="cta-container">
