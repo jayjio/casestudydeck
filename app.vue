@@ -337,7 +337,7 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -360,7 +360,7 @@ const handleSubmit = async () => {
   
   background-color: var(--bg-color);
   width: 100%;
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   padding: 40px 20px;
   overflow: visible;
 }
@@ -386,7 +386,7 @@ const handleSubmit = async () => {
 }
 
 .section-title {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 600;
   font-size: 48px;
   line-height: 1.1;
@@ -397,7 +397,7 @@ const handleSubmit = async () => {
 }
 
 .section-description {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
@@ -440,7 +440,7 @@ const handleSubmit = async () => {
 }
 
 .floating-label {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: normal;
@@ -470,7 +470,7 @@ const handleSubmit = async () => {
   background: transparent;
   border: none;
   outline: none;
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 40px;
@@ -512,7 +512,7 @@ const handleSubmit = async () => {
 }
 
 .cta-text {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 600;
   font-size: 18px;
   line-height: normal;
@@ -533,7 +533,7 @@ const handleSubmit = async () => {
   border: 1px solid rgba(220, 38, 38, 0.3);
   border-radius: var(--inner-corner-radius);
   padding: 16px 21px;
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 500;
   font-size: 16px;
   color: #fca5a5;
@@ -663,7 +663,7 @@ const handleSubmit = async () => {
 }
 
 .loading-text {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #ffffff;
@@ -688,14 +688,14 @@ const handleSubmit = async () => {
 }
 
 .response-label {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 600;
   font-size: 18px;
   color: var(--white-color);
 }
 
 .response-content {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 300;
   font-size: 16px;
   line-height: 1.6;
@@ -706,7 +706,7 @@ const handleSubmit = async () => {
 
 /* Subtitle */
 .subtitle {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: normal;
@@ -761,7 +761,7 @@ const handleSubmit = async () => {
 }
 
 .card-title {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 400;
   font-size: 22px;
   line-height: 1.02;
@@ -780,7 +780,7 @@ const handleSubmit = async () => {
 }
 
 .tag-text {
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.02;
@@ -809,7 +809,7 @@ const handleSubmit = async () => {
   border: 1px solid var(--text-field-stroke-color);
   border-radius: 4px;
   padding: 12px 16px;
-  font-family: 'Rethink Sans', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-weight: 400;
   font-size: 14px;
   color: var(--white-color);
