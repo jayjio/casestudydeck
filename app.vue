@@ -269,8 +269,11 @@ const handleSubmit = async () => {
   // Increment loading message index for next time
   loadingMessageIndex.value++
 
-  // Trigger animation
-  animateCtaOut()
+  // Show loading animation immediately
+  showLoading.value = true
+  nextTick(() => {
+    animateLoadingIn()
+  })
 
   isLoading.value = true
   errorMessage.value = ''
@@ -321,11 +324,8 @@ const handleSubmit = async () => {
     errorMessage.value = errorMsg
     animateLoadingOut()
     
-    // Reset CTA section visibility so user can try again
+    // Clear input so user can try again
     setTimeout(() => {
-      if (ctaSectionRef.value) {
-        gsap.set(ctaSectionRef.value, { display: 'flex', y: 0 })
-      }
       inputValue.value = ''
     }, 500)
   } finally {
@@ -380,10 +380,12 @@ const handleSubmit = async () => {
   flex-direction: column;
   gap: 11px;
   align-items: center;
+  padding: 20px;
 }
 
 .cta-container {
   background-color: var(--panel-bg-color);
+  border: 1px solid var(--text-field-stroke-color);
   border-radius: var(--panel-corner-radius);
   display: flex;
   gap: 10px;
@@ -396,7 +398,7 @@ const handleSubmit = async () => {
 /* Text Field with Floating Label */
 .text-field-open {
   flex: 1;
-  height: 100%;
+  height: 80%;
   border: 1px solid var(--text-field-stroke-color);
   border-radius: var(--inner-corner-radius);
   padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
@@ -468,7 +470,7 @@ const handleSubmit = async () => {
   justify-content: center;
   gap: 24px;
   padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
-  height: 100%;
+  height: 80%;
   width: 154px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -531,7 +533,7 @@ const handleSubmit = async () => {
   border: 1px solid var(--text-field-stroke-color);
   border-radius: var(--panel-corner-radius);
   padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
-  margin-top: -26px;
+  margin-top: 20px;
 }
 
 /* Loading Animation */
