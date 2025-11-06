@@ -919,7 +919,7 @@ html, body {
   padding: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px 24px;
+  gap: 12px 12px;
   margin-top: 11px;
   animation: fadeIn 0.2s ease-in;
 }
