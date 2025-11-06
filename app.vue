@@ -521,7 +521,7 @@ const handleSubmit = async () => {
   font-weight: 600;
   font-size: 16px;
   line-height: normal;
-  color: var(--white-color);
+  color: #fcf3ea;
   white-space: nowrap;
 }
 
