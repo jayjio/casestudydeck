@@ -18,6 +18,7 @@
               for="welcome-input"
               class="floating-label"
               :class="{ 'floating': isFocused || inputValue }"
+              :key="placeholderKey"
             >
               {{ placeholderText }}
             </label>
@@ -118,7 +119,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick, computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import gsap from 'gsap'
 
 // State
@@ -144,11 +145,42 @@ const currentLoadingMessage = computed(() => {
   return loadingMessages[loadingMessageIndex.value % loadingMessages.length]
 })
 
+// Rotating placeholder texts
+const placeholderTexts = [
+  'Ask me anything about my work...',
+  'Ask about my projects, process, or background...',
+  'What motivates you?',
+  'What\'s your design process?',
+  'What has been your favorite project to work on?'
+]
+
+const currentPlaceholderIndex = ref(0)
+const placeholderKey = ref(0)
+
+// Rotate placeholder text every 3 seconds
+let placeholderInterval: NodeJS.Timeout | null = null
+
+onMounted(() => {
+  placeholderInterval = setInterval(() => {
+    if (!isFocused.value && !inputValue.value) {
+      currentPlaceholderIndex.value = (currentPlaceholderIndex.value + 1) % placeholderTexts.length
+      placeholderKey.value++
+    }
+  }, 3000)
+})
+
+// Cleanup interval on unmount
+onBeforeUnmount(() => {
+  if (placeholderInterval) {
+    clearInterval(placeholderInterval)
+  }
+})
+
 // Computed placeholder text
 const placeholderText = computed(() => {
   return (isFocused.value || inputValue.value)
     ? 'You can use a suggested question (lame) or ask your own (cool)'
-    : 'Let\'s get to know each other! Ask me anything'
+    : placeholderTexts[currentPlaceholderIndex.value]
 })
 
 // Suggested queries
@@ -460,6 +492,7 @@ const handleSubmit = async () => {
   pointer-events: none;
   transform-origin: left center;
   width: calc(100% - (var(--textfield-padding-lr) * 2));
+  animation: slideUpFade 0.6s ease-in-out;
 }
 
 .floating-label.floating {
@@ -468,6 +501,7 @@ const handleSubmit = async () => {
   transform: translateY(0);
   font-weight: 500;
   color: #b0b4c4;
+  animation: none;
 }
 
 .text-input {
@@ -684,6 +718,25 @@ const handleSubmit = async () => {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translate(0, calc(-50% + 20px));
+  }
+  20% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, calc(-50% - 20px));
   }
 }
 
