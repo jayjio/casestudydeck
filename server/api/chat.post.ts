@@ -20,6 +20,31 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    // Special handling for "How did you build this tool?" question
+    if (message.toLowerCase().includes('how did you build this tool') ||
+        message.toLowerCase().includes('how did you build this')) {
+      return {
+        success: true,
+        response: `How I Built This
+This started as a learning project to understand how these AI tools work together, and evolved into an agent that can speak intelligently about my work and background.
+
+The Tools
+I designed it in Figma using proper auto layout, which let me bring it directly into Cursor via Figma's MCP servers with the styling intact. I integrated Claude Code into Cursor for the build, used Claude's API for the LLM (it's just better at speaking like a human), and deployed through GitHub and Vercel. Right now it's embedded via iframe on my Webflow site.
+
+The Challenge
+The trickiest parts were twofold. First, getting the LLM to respond accurately to any question. The agent pulls from my website and a context document, so I had to load in a ton of content to give it enough to work with.
+
+Second, getting the design exactly right through these tools is still tedious. Even with a solid Figma setup, there's constant iteration and refinement to get things pixel-perfect. These tools are amazing, but they're not magic yet.
+
+What I Learned
+Cursor and Claude Code are genuinely transformative. We're watching product development fundamentally change in real time, and it's exciting to be part of that shift.
+
+Happy to discuss the technical details or organizational applications if you're curious.`,
+        model: model,
+        usage: { input_tokens: 0, output_tokens: 0 }
+      }
+    }
+
     const anthropic = new Anthropic({
       apiKey: config.anthropicApiKey
     })
