@@ -8,7 +8,7 @@
         <p class="section-description">This is an interactive AI tool that can answer questions about my experience, my work, and what I care about. I built it using Claude's API and tools like Figma, Cursor, the Model Context Protocol, and a context document to give it relevant resources about me.</p>
         <p class="section-description">Want to hear more about how it was built? Check out the first suggested question down below.</p>
         <div class="cta-container">
-          <!-- Text Field with Floating Label -->
+          <!-- Text Field with Floating Label and Button Inside -->
           <div
             class="text-field-open"
             :class="{ 'is-focused': isFocused || inputValue }"
@@ -33,19 +33,19 @@
               @blur="setTimeout(() => isFocused = false, 200)"
               @keyup.enter="handleSubmit"
             />
-          </div>
 
-          <!-- CTA Button -->
-          <button
-            class="cta-button"
-            @click="handleSubmit"
-            :disabled="isLoading"
-          >
-            <span class="cta-text">Ask</span>
-            <svg v-if="!isLoading" class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+            <!-- CTA Button Inside Text Field -->
+            <button
+              class="cta-button"
+              @click="handleSubmit"
+              :disabled="isLoading"
+            >
+              <span class="cta-text">Ask</span>
+              <svg v-if="!isLoading" class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <!-- Suggested Queries (Outside container) -->
@@ -145,9 +145,10 @@ const loadingMessageIndex = ref(0)
 
 // Loading messages that cycle through
 const loadingMessages = [
-  'Analyzing my life choices.. parsing all mistakes..',
-  'Is this a fake loading animation and just static content? Who can say',
-  'Please be patient, this is in fact my first rodeo'
+  'Analyzing all life choices...parsing all mistakes...',
+  'Please be patient. This is, in fact, my first rodeo',
+  'just a sec just a sec just a sec',
+  'Mo data mo problems, that\'s the way I was trained'
 ]
 
 // Computed current loading message
@@ -168,7 +169,7 @@ const currentPlaceholderIndex = ref(0)
 const placeholderKey = ref(0)
 
 // Rotate placeholder text every 4 seconds
-let placeholderInterval: NodeJS.Timeout | null = null
+let placeholderInterval: ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
   placeholderInterval = setInterval(() => {
@@ -495,29 +496,25 @@ const handleSubmit = async () => {
 }
 
 .cta-container {
-  background-color: var(--panel-bg-color);
-  border: 1px solid var(--text-field-stroke-color);
-  border-radius: var(--panel-corner-radius);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
   width: 100%;
-  height: 92px;
 }
 
 /* Text Field with Floating Label */
 .text-field-open {
-  flex: 1;
-  height: 80%;
+  width: 100%;
+  background-color: var(--panel-bg-color);
   border: 1px solid var(--text-field-stroke-color);
-  border-radius: var(--inner-corner-radius);
+  border-radius: var(--panel-corner-radius);
   padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
+  padding-right: 180px; /* Make room for button */
   position: relative;
   cursor: text;
   transition: border-color 0.3s ease;
-  background: transparent;
   overflow: visible;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .text-field-open.is-focused {
@@ -545,7 +542,7 @@ const handleSubmit = async () => {
 
 .floating-label.floating {
   font-size: 14px;
-  top: 12px;
+  top: 16px;
   transform: translateY(0);
   font-weight: 500;
   color: #b0b4c4;
@@ -559,12 +556,12 @@ const handleSubmit = async () => {
   border: none;
   outline: none;
   font-family: 'Sora', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 18px;
   line-height: 40px;
   color: #fcf3ea;
   padding: 0;
-  margin-top: -8px;
+  margin-top: 4px;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -575,6 +572,10 @@ const handleSubmit = async () => {
 
 /* CTA Button */
 .cta-button {
+  position: absolute;
+  right: 21px;
+  top: 50%;
+  transform: translateY(-50%);
   background-color: transparent;
   border: 2px solid var(--white-color);
   border-radius: 60px;
@@ -582,8 +583,8 @@ const handleSubmit = async () => {
   align-items: center;
   justify-content: center;
   gap: 24px;
-  padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
-  height: 80%;
+  padding: 12px 21px;
+  height: 52px;
   width: 154px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
@@ -591,12 +592,12 @@ const handleSubmit = async () => {
 
 .cta-button:hover {
   background-color: rgba(252, 243, 234, 0.1);
-  transform: translateY(-2px);
+  transform: translateY(-50%) translateY(-2px);
   box-shadow: 0 4px 12px rgba(252, 243, 234, 0.2);
 }
 
 .cta-button:active {
-  transform: translateY(0);
+  transform: translateY(-50%) translateY(0);
 }
 
 .cta-text {
@@ -826,12 +827,13 @@ const handleSubmit = async () => {
 .cta-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
+  transform: translateY(-50%);
 }
 
 .cta-button:disabled:hover {
-  transform: none;
+  transform: translateY(-50%);
   box-shadow: none;
+  background-color: transparent;
 }
 
 /* Fixed Footer Cards */
@@ -946,8 +948,8 @@ const handleSubmit = async () => {
 }
 
 .ask-another-button {
-  background-color: transparent;
-  border: 2px solid var(--white-color);
+  background-color: #22242b;
+  border: none;
   border-radius: 60px;
   display: flex;
   align-items: center;
@@ -1003,18 +1005,37 @@ const handleSubmit = async () => {
     width: 100%;
   }
 
-  .cta-container {
-    flex-direction: column;
-    height: auto;
-  }
-
   .text-field-open {
     width: 100%;
-    min-height: 80px;
+    min-height: 140px;
+    padding-right: var(--textfield-padding-lr);
+    padding-bottom: 70px;
   }
 
   .cta-button {
-    width: 100%;
+    position: absolute;
+    bottom: 21px;
+    left: 50%;
+    top: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 42px);
+    height: 52px;
+  }
+
+  .cta-button:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+
+  .cta-button:active {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .cta-button:disabled {
+    transform: translateX(-50%);
+  }
+
+  .cta-button:disabled:hover {
+    transform: translateX(-50%);
   }
 }
 
@@ -1040,15 +1061,40 @@ const handleSubmit = async () => {
     padding: 16px;
   }
 
-  .cta-button {
-    min-height: 52px;
-    font-size: 18px;
-    padding: 16px 24px;
+  .text-field-open {
+    min-height: 140px;
+    padding-right: var(--textfield-padding-lr);
+    padding-bottom: 70px;
+    font-size: 16px;
   }
 
-  .text-field-open {
-    min-height: 56px;
+  .cta-button {
+    position: absolute;
+    bottom: 21px;
+    left: 50%;
+    top: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 42px);
+    min-height: 52px;
+    height: 52px;
     font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  .cta-button:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+
+  .cta-button:active {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .cta-button:disabled {
+    transform: translateX(-50%);
+  }
+
+  .cta-button:disabled:hover {
+    transform: translateX(-50%);
   }
 
   .floating-label {
@@ -1056,7 +1102,7 @@ const handleSubmit = async () => {
   }
 
   .text-input {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .suggested-queries {
