@@ -537,7 +537,7 @@ const handleSubmit = async () => {
   flex-direction: column;
   gap: 11px;
   align-items: flex-start;
-  padding: 20px;
+  padding: 0;
   box-sizing: border-box;
 }
 
