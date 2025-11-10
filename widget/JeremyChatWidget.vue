@@ -1,7 +1,9 @@
 <template>
   <div class="jeremy-chat-widget" :style="widgetStyles">
-    <!-- Main Content -->
-    <main class="main-content">
+    <!-- Background Container -->
+    <div class="widget-container">
+      <!-- Main Content -->
+      <main class="main-content">
       <!-- CTA Section -->
       <div ref="ctaSectionRef" class="cta-section">
         <h1 class="section-title">get to know <span class="gradient-text">[not really]</span> me</h1>
@@ -134,6 +136,7 @@
         </button>
       </div>
     </main>
+    </div>
   </div>
 </template>
 
@@ -496,11 +499,27 @@ const handleSubmit = async () => {
   --tag-container-pad-tb: 24px;
   --tag-corner-rad: 60px;
   
-  background-color: var(--bg-color);
   width: 100%;
   font-family: 'Sora', sans-serif;
-  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
   overflow: visible;
+}
+
+/* Widget Container - Background with fixed width and padding */
+.widget-container {
+  width: 1161px;
+  max-width: 100%;
+  min-height: 100%;
+  padding: 60px 0;
+  background-color: #16171e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
 }
 
 /* Main Content */
@@ -511,6 +530,7 @@ const handleSubmit = async () => {
   align-items: center;
   padding: 0;
   overflow: visible;
+  width: 100%;
 }
 
 .cta-section {

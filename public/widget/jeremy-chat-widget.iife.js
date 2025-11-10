@@ -10288,10 +10288,11 @@ var JeremyChatWidget = (function(exports) {
   gsap.registerPlugin(CSSPlugin);
   var gsapWithCSS = gsap.registerPlugin(CSSPlugin) || gsap;
   gsapWithCSS.core.Tween;
-  const _hoisted_1 = { class: "main-content" };
-  const _hoisted_2 = { class: "cta-container" };
-  const _hoisted_3 = ["disabled"];
-  const _hoisted_4 = {
+  const _hoisted_1 = { class: "widget-container" };
+  const _hoisted_2 = { class: "main-content" };
+  const _hoisted_3 = { class: "cta-container" };
+  const _hoisted_4 = ["disabled"];
+  const _hoisted_5 = {
     key: 0,
     class: "arrow-icon-submit",
     width: "20",
@@ -10300,19 +10301,19 @@ var JeremyChatWidget = (function(exports) {
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg"
   };
-  const _hoisted_5 = {
+  const _hoisted_6 = {
     key: 0,
     class: "suggested-queries"
   };
-  const _hoisted_6 = ["onClick"];
-  const _hoisted_7 = {
+  const _hoisted_7 = ["onClick"];
+  const _hoisted_8 = {
     key: 1,
     class: "error-message"
   };
-  const _hoisted_8 = { class: "loading-text" };
-  const _hoisted_9 = { class: "response-header" };
-  const _hoisted_10 = { class: "response-label" };
-  const _hoisted_11 = ["innerHTML"];
+  const _hoisted_9 = { class: "loading-text" };
+  const _hoisted_10 = { class: "response-header" };
+  const _hoisted_11 = { class: "response-label" };
+  const _hoisted_12 = ["innerHTML"];
   const selectedModel = "claude-sonnet-4-20250514";
   const _sfc_main = /* @__PURE__ */ defineComponent({
     __name: "JeremyChatWidget",
@@ -10559,140 +10560,142 @@ var JeremyChatWidget = (function(exports) {
           class: "jeremy-chat-widget",
           style: normalizeStyle(widgetStyles.value)
         }, [
-          createBaseVNode("main", _hoisted_1, [
-            createBaseVNode("div", {
-              ref_key: "ctaSectionRef",
-              ref: ctaSectionRef,
-              class: "cta-section"
-            }, [
-              _cache[4] || (_cache[4] = createStaticVNode('<h1 class="section-title" data-v-da2b4d00>get to know <span class="gradient-text" data-v-da2b4d00>[not really]</span> me</h1><p class="section-description" data-v-da2b4d00>This is an AI tool I built that can answer questions about my experience, work, interests, and who knows what else. Hopefully not my security questions.</p><p class="section-description tech-item" data-v-da2b4d00>→ For design and dev, I used Figma with the MCP server protocol, Cursor, and Claude Code.</p><p class="section-description tech-item" data-v-da2b4d00>→ For the LLM, I used the Claude API and an extensive context doc along with Github and Vercel for deployment.</p><p class="section-description tech-item" data-v-da2b4d00>→ The last step was creating a standalone Vue component embedded into my Webflow site.</p><p class="section-description" data-v-da2b4d00>Want to hear more about how it was built? Check out the first suggested question down below ↓</p>', 6)),
-              createBaseVNode("div", _hoisted_2, [
-                createBaseVNode("div", {
-                  class: normalizeClass(["text-field-open", { "is-focused": isFocused.value || inputValue.value }]),
-                  onClick: focusInput
-                }, [
-                  (openBlock(), createElementBlock("label", {
-                    for: "welcome-input",
-                    class: normalizeClass(["floating-label", { "floating": isFocused.value || inputValue.value }]),
-                    key: placeholderKey.value
-                  }, toDisplayString(placeholderText.value), 3)),
-                  withDirectives(createBaseVNode("input", {
-                    id: "welcome-input",
-                    ref_key: "inputRef",
-                    ref: inputRef,
-                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => inputValue.value = $event),
-                    type: "text",
-                    class: "text-input",
-                    autocomplete: "off",
-                    onFocus: _cache[1] || (_cache[1] = ($event) => isFocused.value = true),
-                    onBlur: _cache[2] || (_cache[2] = ($event) => _ctx.setTimeout(() => isFocused.value = false, 200)),
-                    onKeyup: withKeys(handleSubmit, ["enter"])
-                  }, null, 544), [
-                    [vModelText, inputValue.value]
-                  ]),
-                  createBaseVNode("button", {
-                    class: "cta-button",
-                    onClick: handleSubmit,
-                    disabled: isLoading.value
-                  }, [
-                    !isLoading.value ? (openBlock(), createElementBlock("svg", _hoisted_4, [..._cache[3] || (_cache[3] = [
-                      createBaseVNode("path", {
-                        d: "M12 5L12 19M12 5L7 10M12 5L17 10",
-                        stroke: "currentColor",
-                        "stroke-width": "2.5",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round"
-                      }, null, -1)
-                    ])])) : createCommentVNode("", true)
-                  ], 8, _hoisted_3)
-                ], 2)
-              ]),
-              !inputValue.value ? (openBlock(), createElementBlock("div", _hoisted_5, [
-                (openBlock(), createElementBlock(Fragment, null, renderList(suggestedQueries, (query, index) => {
-                  return createBaseVNode("button", {
-                    key: index,
-                    class: normalizeClass(["suggested-query-item", { "suggested-query-item-special": query.includes("How did you build this tool") }]),
-                    onClick: withModifiers(($event) => selectSuggestedQuery(query), ["prevent"])
-                  }, toDisplayString(query), 11, _hoisted_6);
-                }), 64))
-              ])) : createCommentVNode("", true),
-              errorMessage.value ? (openBlock(), createElementBlock("div", _hoisted_7, toDisplayString(errorMessage.value), 1)) : createCommentVNode("", true)
-            ], 512),
-            showLoading.value ? (openBlock(), createElementBlock("div", {
-              key: 0,
-              ref_key: "loadingRef",
-              ref: loadingRef,
-              class: "loading-container"
-            }, [
-              _cache[5] || (_cache[5] = createStaticVNode('<svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" data-v-da2b4d00><defs data-v-da2b4d00><radialGradient id="fogGradient1" cx="30%" cy="30%" data-v-da2b4d00><stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" data-v-da2b4d00></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" data-v-da2b4d00></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-da2b4d00></stop></radialGradient><radialGradient id="fogGradient2" cx="70%" cy="60%" data-v-da2b4d00><stop offset="0%" stop-color="rgba(252, 243, 234, 0.12)" data-v-da2b4d00></stop><stop offset="60%" stop-color="rgba(252, 243, 234, 0.03)" data-v-da2b4d00></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-da2b4d00></stop></radialGradient><radialGradient id="fogGradient3" cx="50%" cy="80%" data-v-da2b4d00><stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" data-v-da2b4d00></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.02)" data-v-da2b4d00></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-da2b4d00></stop></radialGradient><radialGradient id="centerGlow" data-v-da2b4d00><stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" data-v-da2b4d00></stop><stop offset="70%" stop-color="rgba(255, 255, 255, 0)" data-v-da2b4d00></stop></radialGradient><filter id="glow" data-v-da2b4d00><feGaussianBlur stdDeviation="2" result="coloredBlur" data-v-da2b4d00></feGaussianBlur><feMerge data-v-da2b4d00><feMergeNode in="coloredBlur" data-v-da2b4d00></feMergeNode><feMergeNode in="SourceGraphic" data-v-da2b4d00></feMergeNode></feMerge></filter></defs><circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" data-v-da2b4d00></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" data-v-da2b4d00></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" data-v-da2b4d00></circle><circle cx="60" cy="60" r="40" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" data-v-da2b4d00></circle></svg>', 1)),
-              createBaseVNode("p", _hoisted_8, toDisplayString(currentLoadingMessage.value), 1)
-            ], 512)) : createCommentVNode("", true),
-            aiResponse.value ? (openBlock(), createElementBlock("div", {
-              key: 1,
-              ref_key: "responseContainerRef",
-              ref: responseContainerRef,
-              class: "response-container-main"
-            }, [
-              createBaseVNode("div", _hoisted_9, [
-                createBaseVNode("span", _hoisted_10, toDisplayString(lastQuery.value), 1)
-              ]),
+          createBaseVNode("div", _hoisted_1, [
+            createBaseVNode("main", _hoisted_2, [
               createBaseVNode("div", {
-                class: "response-content",
-                innerHTML: aiResponse.value
-              }, null, 8, _hoisted_11)
-            ], 512)) : createCommentVNode("", true),
-            aiResponse.value ? (openBlock(), createElementBlock("div", {
-              key: 2,
-              ref_key: "askAnotherRef",
-              ref: askAnotherRef,
-              class: "ask-another-container"
-            }, [
-              createBaseVNode("button", {
-                class: "ask-another-button",
-                onClick: scrollToTop
-              }, [..._cache[6] || (_cache[6] = [
-                createBaseVNode("span", { class: "ask-another-text" }, "Ask another", -1),
-                createBaseVNode("svg", {
-                  class: "cycle-icon-refresh",
-                  width: "16",
-                  height: "16",
-                  viewBox: "0 0 18 18",
-                  fill: "none",
-                  xmlns: "http://www.w3.org/2000/svg"
-                }, [
-                  createBaseVNode("path", {
-                    d: "M2 9C2 5.13401 5.13401 2 9 2C11.6651 2 13.9627 3.50409 15.0737 5.68198M16 9C16 12.866 12.866 16 9 16C6.33488 16 4.03725 14.4959 2.92627 12.318M15.0737 5.68198L16 2M15.0737 5.68198L11.5 5M2.92627 12.318L2 16M2.92627 12.318L6.5 13",
-                    stroke: "currentColor",
-                    "stroke-width": "1.5",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  })
-                ], -1)
-              ])]),
-              isRandomFactResponse.value ? (openBlock(), createElementBlock("button", {
+                ref_key: "ctaSectionRef",
+                ref: ctaSectionRef,
+                class: "cta-section"
+              }, [
+                _cache[4] || (_cache[4] = createStaticVNode('<h1 class="section-title" data-v-7fe379d8>get to know <span class="gradient-text" data-v-7fe379d8>[not really]</span> me</h1><p class="section-description" data-v-7fe379d8>This is an AI tool I built that can answer questions about my experience, work, interests, and who knows what else. Hopefully not my security questions.</p><p class="section-description tech-item" data-v-7fe379d8>→ For design and dev, I used Figma with the MCP server protocol, Cursor, and Claude Code.</p><p class="section-description tech-item" data-v-7fe379d8>→ For the LLM, I used the Claude API and an extensive context doc along with Github and Vercel for deployment.</p><p class="section-description tech-item" data-v-7fe379d8>→ The last step was creating a standalone Vue component embedded into my Webflow site.</p><p class="section-description" data-v-7fe379d8>Want to hear more about how it was built? Check out the first suggested question down below ↓</p>', 6)),
+                createBaseVNode("div", _hoisted_3, [
+                  createBaseVNode("div", {
+                    class: normalizeClass(["text-field-open", { "is-focused": isFocused.value || inputValue.value }]),
+                    onClick: focusInput
+                  }, [
+                    (openBlock(), createElementBlock("label", {
+                      for: "welcome-input",
+                      class: normalizeClass(["floating-label", { "floating": isFocused.value || inputValue.value }]),
+                      key: placeholderKey.value
+                    }, toDisplayString(placeholderText.value), 3)),
+                    withDirectives(createBaseVNode("input", {
+                      id: "welcome-input",
+                      ref_key: "inputRef",
+                      ref: inputRef,
+                      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => inputValue.value = $event),
+                      type: "text",
+                      class: "text-input",
+                      autocomplete: "off",
+                      onFocus: _cache[1] || (_cache[1] = ($event) => isFocused.value = true),
+                      onBlur: _cache[2] || (_cache[2] = ($event) => _ctx.setTimeout(() => isFocused.value = false, 200)),
+                      onKeyup: withKeys(handleSubmit, ["enter"])
+                    }, null, 544), [
+                      [vModelText, inputValue.value]
+                    ]),
+                    createBaseVNode("button", {
+                      class: "cta-button",
+                      onClick: handleSubmit,
+                      disabled: isLoading.value
+                    }, [
+                      !isLoading.value ? (openBlock(), createElementBlock("svg", _hoisted_5, [..._cache[3] || (_cache[3] = [
+                        createBaseVNode("path", {
+                          d: "M12 5L12 19M12 5L7 10M12 5L17 10",
+                          stroke: "currentColor",
+                          "stroke-width": "2.5",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }, null, -1)
+                      ])])) : createCommentVNode("", true)
+                    ], 8, _hoisted_4)
+                  ], 2)
+                ]),
+                !inputValue.value ? (openBlock(), createElementBlock("div", _hoisted_6, [
+                  (openBlock(), createElementBlock(Fragment, null, renderList(suggestedQueries, (query, index) => {
+                    return createBaseVNode("button", {
+                      key: index,
+                      class: normalizeClass(["suggested-query-item", { "suggested-query-item-special": query.includes("How did you build this tool") }]),
+                      onClick: withModifiers(($event) => selectSuggestedQuery(query), ["prevent"])
+                    }, toDisplayString(query), 11, _hoisted_7);
+                  }), 64))
+                ])) : createCommentVNode("", true),
+                errorMessage.value ? (openBlock(), createElementBlock("div", _hoisted_8, toDisplayString(errorMessage.value), 1)) : createCommentVNode("", true)
+              ], 512),
+              showLoading.value ? (openBlock(), createElementBlock("div", {
                 key: 0,
-                class: "another-fact-button",
-                onClick: getAnotherFact
-              }, [..._cache[7] || (_cache[7] = [
-                createBaseVNode("span", { class: "another-fact-text" }, "Next fact", -1),
-                createBaseVNode("svg", {
-                  class: "arrow-icon-right",
-                  width: "18",
-                  height: "14",
-                  viewBox: "0 0 18 14",
-                  fill: "none",
-                  xmlns: "http://www.w3.org/2000/svg"
-                }, [
-                  createBaseVNode("path", {
-                    d: "M1 7H17M17 7L11 1M17 7L11 13",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  })
-                ], -1)
-              ])])) : createCommentVNode("", true)
-            ], 512)) : createCommentVNode("", true)
+                ref_key: "loadingRef",
+                ref: loadingRef,
+                class: "loading-container"
+              }, [
+                _cache[5] || (_cache[5] = createStaticVNode('<svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" data-v-7fe379d8><defs data-v-7fe379d8><radialGradient id="fogGradient1" cx="30%" cy="30%" data-v-7fe379d8><stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" data-v-7fe379d8></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" data-v-7fe379d8></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-7fe379d8></stop></radialGradient><radialGradient id="fogGradient2" cx="70%" cy="60%" data-v-7fe379d8><stop offset="0%" stop-color="rgba(252, 243, 234, 0.12)" data-v-7fe379d8></stop><stop offset="60%" stop-color="rgba(252, 243, 234, 0.03)" data-v-7fe379d8></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-7fe379d8></stop></radialGradient><radialGradient id="fogGradient3" cx="50%" cy="80%" data-v-7fe379d8><stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" data-v-7fe379d8></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.02)" data-v-7fe379d8></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-7fe379d8></stop></radialGradient><radialGradient id="centerGlow" data-v-7fe379d8><stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" data-v-7fe379d8></stop><stop offset="70%" stop-color="rgba(255, 255, 255, 0)" data-v-7fe379d8></stop></radialGradient><filter id="glow" data-v-7fe379d8><feGaussianBlur stdDeviation="2" result="coloredBlur" data-v-7fe379d8></feGaussianBlur><feMerge data-v-7fe379d8><feMergeNode in="coloredBlur" data-v-7fe379d8></feMergeNode><feMergeNode in="SourceGraphic" data-v-7fe379d8></feMergeNode></feMerge></filter></defs><circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" data-v-7fe379d8></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" data-v-7fe379d8></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" data-v-7fe379d8></circle><circle cx="60" cy="60" r="40" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" data-v-7fe379d8></circle></svg>', 1)),
+                createBaseVNode("p", _hoisted_9, toDisplayString(currentLoadingMessage.value), 1)
+              ], 512)) : createCommentVNode("", true),
+              aiResponse.value ? (openBlock(), createElementBlock("div", {
+                key: 1,
+                ref_key: "responseContainerRef",
+                ref: responseContainerRef,
+                class: "response-container-main"
+              }, [
+                createBaseVNode("div", _hoisted_10, [
+                  createBaseVNode("span", _hoisted_11, toDisplayString(lastQuery.value), 1)
+                ]),
+                createBaseVNode("div", {
+                  class: "response-content",
+                  innerHTML: aiResponse.value
+                }, null, 8, _hoisted_12)
+              ], 512)) : createCommentVNode("", true),
+              aiResponse.value ? (openBlock(), createElementBlock("div", {
+                key: 2,
+                ref_key: "askAnotherRef",
+                ref: askAnotherRef,
+                class: "ask-another-container"
+              }, [
+                createBaseVNode("button", {
+                  class: "ask-another-button",
+                  onClick: scrollToTop
+                }, [..._cache[6] || (_cache[6] = [
+                  createBaseVNode("span", { class: "ask-another-text" }, "Ask another", -1),
+                  createBaseVNode("svg", {
+                    class: "cycle-icon-refresh",
+                    width: "16",
+                    height: "16",
+                    viewBox: "0 0 18 18",
+                    fill: "none",
+                    xmlns: "http://www.w3.org/2000/svg"
+                  }, [
+                    createBaseVNode("path", {
+                      d: "M2 9C2 5.13401 5.13401 2 9 2C11.6651 2 13.9627 3.50409 15.0737 5.68198M16 9C16 12.866 12.866 16 9 16C6.33488 16 4.03725 14.4959 2.92627 12.318M15.0737 5.68198L16 2M15.0737 5.68198L11.5 5M2.92627 12.318L2 16M2.92627 12.318L6.5 13",
+                      stroke: "currentColor",
+                      "stroke-width": "1.5",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    })
+                  ], -1)
+                ])]),
+                isRandomFactResponse.value ? (openBlock(), createElementBlock("button", {
+                  key: 0,
+                  class: "another-fact-button",
+                  onClick: getAnotherFact
+                }, [..._cache[7] || (_cache[7] = [
+                  createBaseVNode("span", { class: "another-fact-text" }, "Next fact", -1),
+                  createBaseVNode("svg", {
+                    class: "arrow-icon-right",
+                    width: "18",
+                    height: "14",
+                    viewBox: "0 0 18 14",
+                    fill: "none",
+                    xmlns: "http://www.w3.org/2000/svg"
+                  }, [
+                    createBaseVNode("path", {
+                      d: "M1 7H17M17 7L11 1M17 7L11 13",
+                      stroke: "currentColor",
+                      "stroke-width": "2",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    })
+                  ], -1)
+                ])])) : createCommentVNode("", true)
+              ], 512)) : createCommentVNode("", true)
+            ])
           ])
         ], 4);
       };
@@ -10705,7 +10708,7 @@ var JeremyChatWidget = (function(exports) {
     }
     return target;
   };
-  const JeremyChatWidget2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-da2b4d00"]]);
+  const JeremyChatWidget2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7fe379d8"]]);
   function injectCSS(cssUrl) {
     if (typeof document === "undefined") return;
     const existingLink = document.querySelector("link[data-jeremy-chat-widget-css]");
