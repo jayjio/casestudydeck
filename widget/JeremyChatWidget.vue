@@ -515,7 +515,6 @@ const handleSubmit = async () => {
   max-width: 100%;
   min-height: auto;
   padding: 60px 0;
-  background-color: #16171e;
   display: flex;
   flex-direction: column;
   align-items: center;
