@@ -10,6 +10,7 @@ function getNextFactNumber(): number {
   // If all facts have been shown, reset and start a new cycle
   if (shownFacts.length >= totalFacts) {
     shownFacts = []
+    lastFactNumber = 0 // Reset last fact when starting a new cycle
   }
   
   // Create array of available fact numbers (1 to totalFacts)
@@ -19,11 +20,13 @@ function getNextFactNumber(): number {
   // If no available facts (shouldn't happen), reset
   if (availableFacts.length === 0) {
     shownFacts = []
+    lastFactNumber = 0 // Reset last fact when resetting
     availableFacts = Array.from({ length: totalFacts }, (_, i) => i + 1)
   }
   
-  // Ensure we don't repeat the last fact shown if there are alternatives
-  if (lastFactNumber > 0 && availableFacts.length > 1 && availableFacts.includes(lastFactNumber)) {
+  // Ensure we don't repeat the last fact shown ONLY if we're in the middle of a cycle
+  // (i.e., if shownFacts.length > 0, meaning we're not at the start of a cycle)
+  if (lastFactNumber > 0 && shownFacts.length > 0 && availableFacts.length > 1 && availableFacts.includes(lastFactNumber)) {
     // Remove the last fact from available options to ensure no immediate repeat
     availableFacts = availableFacts.filter(f => f !== lastFactNumber)
   }
