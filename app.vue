@@ -109,9 +109,7 @@
         <div class="response-header">
           <span class="response-label">{{ lastQuery }}</span>
         </div>
-        <div class="response-content">
-          {{ aiResponse }}
-        </div>
+        <div class="response-content" v-html="aiResponse"></div>
       </div>
 
       <!-- Ask Another Button -->
@@ -831,6 +829,11 @@ html, body {
   color: var(--white-color);
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.response-content strong {
+  font-weight: 600;
+  color: var(--white-color);
 }
 
 /* Subtitle */
