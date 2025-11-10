@@ -72,35 +72,43 @@
         <svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="fogGradient1" cx="30%" cy="30%">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" />
-              <stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" />
+              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.18)" />
+              <stop offset="30%" stop-color="rgba(255, 255, 255, 0.08)" />
+              <stop offset="60%" stop-color="rgba(255, 255, 255, 0.03)" />
               <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
             </radialGradient>
             <radialGradient id="fogGradient2" cx="70%" cy="60%">
-              <stop offset="0%" stop-color="rgba(252, 243, 234, 0.12)" />
-              <stop offset="60%" stop-color="rgba(252, 243, 234, 0.03)" />
+              <stop offset="0%" stop-color="rgba(252, 243, 234, 0.15)" />
+              <stop offset="40%" stop-color="rgba(252, 243, 234, 0.06)" />
+              <stop offset="70%" stop-color="rgba(252, 243, 234, 0.02)" />
               <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
             </radialGradient>
             <radialGradient id="fogGradient3" cx="50%" cy="80%">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" />
-              <stop offset="50%" stop-color="rgba(255, 255, 255, 0.02)" />
+              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" />
+              <stop offset="40%" stop-color="rgba(255, 255, 255, 0.05)" />
+              <stop offset="70%" stop-color="rgba(255, 255, 255, 0.01)" />
               <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
             </radialGradient>
             <radialGradient id="centerGlow">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" />
-              <stop offset="70%" stop-color="rgba(255, 255, 255, 0)" />
+              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" />
+              <stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" />
+              <stop offset="80%" stop-color="rgba(255, 255, 255, 0.01)" />
+              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
             </radialGradient>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
               <feMerge>
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
+            <filter id="softBlur">
+              <feGaussianBlur stdDeviation="3" />
+            </filter>
           </defs>
-          <circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" />
-          <circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" />
-          <circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" />
+          <circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" filter="url(#softBlur)" />
+          <circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" filter="url(#softBlur)" />
+          <circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" filter="url(#softBlur)" />
           <circle cx="60" cy="60" r="40" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" />
         </svg>
         <p class="loading-text">{{ currentLoadingMessage }}</p>
@@ -700,21 +708,25 @@ html, body {
   width: 120px;
   height: 120px;
   animation: rhythmicPulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  filter: blur(1px);
 }
 
 .fog-layer-1 {
   animation: foggyRotate1 8s ease-in-out infinite;
   transform-origin: center;
+  opacity: 0.9;
 }
 
 .fog-layer-2 {
   animation: foggyRotate2 10s ease-in-out infinite reverse;
   transform-origin: center;
+  opacity: 0.85;
 }
 
 .fog-layer-3 {
   animation: foggyRotate3 6s ease-in-out infinite;
   transform-origin: center;
+  opacity: 0.9;
 }
 
 .center-glow {
