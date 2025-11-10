@@ -56,7 +56,7 @@ export default defineEventHandler(async (event) => {
   
   setHeader(event, 'Access-Control-Allow-Methods', 'POST, OPTIONS, GET')
   setHeader(event, 'Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
-  setHeader(event, 'Access-Control-Max-Age', String(86400))
+  setHeader(event, 'Access-Control-Max-Age', '86400')
   setHeader(event, 'Vary', 'Origin')
 
   // OPTIONS requests are handled by chat.options.ts
