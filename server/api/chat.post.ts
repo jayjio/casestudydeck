@@ -12,26 +12,29 @@ function getNextFactNumber() {
 
 export default defineEventHandler(async (event) => {
   // Handle CORS - Allow all origins for widget embedding
-  const origin = getHeader(event, 'origin')
+  const origin = getHeader(event, 'origin') || getHeader(event, 'referer')?.split('/').slice(0, 3).join('/')
   
+  // Set CORS headers for all requests
   // For widget use case, allow CORS from any origin
   // The API key is server-side, so this is safe
   if (origin) {
     setHeader(event, 'Access-Control-Allow-Origin', origin)
+    setHeader(event, 'Access-Control-Allow-Credentials', 'true')
   } else {
-    // If no origin header (e.g., direct API call), allow all
+    // If no origin header, allow all (fallback)
     setHeader(event, 'Access-Control-Allow-Origin', '*')
   }
   
   setHeader(event, 'Access-Control-Allow-Methods', 'POST, OPTIONS, GET')
-  setHeader(event, 'Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  setHeader(event, 'Access-Control-Allow-Credentials', 'true')
+  setHeader(event, 'Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
   setHeader(event, 'Access-Control-Max-Age', '86400')
+  setHeader(event, 'Vary', 'Origin')
 
-  // Handle OPTIONS request (CORS preflight)
+  // Handle OPTIONS request (CORS preflight) - MUST return early with headers
   if (event.method === 'OPTIONS') {
-    setHeader(event, 'Content-Type', 'text/plain')
-    return { status: 'ok' }
+    event.node.res.statusCode = 204
+    event.node.res.statusMessage = 'No Content'
+    return ''
   }
 
   const config = useRuntimeConfig()
