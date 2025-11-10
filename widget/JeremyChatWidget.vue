@@ -1084,7 +1084,7 @@ const handleSubmit = async () => {
   }
 
   .cta-section {
-    padding: 16px;
+    padding: 0;
   }
 
   .text-field-open {
