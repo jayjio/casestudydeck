@@ -74,7 +74,7 @@ See `QUICK_START_WEBFLOW.md` for detailed steps.
 1. Create `public/widget/` folder
 2. Copy built widget to `public/widget/jeremy-chat-widget.iife.js`
 3. Deploy to Vercel
-4. Access at: `https://your-app.vercel.app/widget/jeremy-chat-widget.iife.js`
+4. Access at: `https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js`
 
 ### Option 2: CDN
 
@@ -89,8 +89,8 @@ Upload to any CDN:
 ### Basic Embed
 
 ```html
-<div id="jeremy-chat-widget" data-jeremy-chat-widget data-api-url="https://your-api.com/api/chat"></div>
-<script src="https://your-api.com/widget/jeremy-chat-widget.iife.js"></script>
+<div id="jeremy-chat-widget" data-jeremy-chat-widget data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"></div>
+<script src="https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
 ```
 
 ### Custom Theme
@@ -99,7 +99,7 @@ Upload to any CDN:
 <div 
   id="jeremy-chat-widget" 
   data-jeremy-chat-widget 
-  data-api-url="https://your-api.com/api/chat"
+  data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"
   data-theme='{"bgColor":"#ffffff","textColor":"#000000"}'
 ></div>
 ```

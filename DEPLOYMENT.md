@@ -7,7 +7,7 @@ You **don't need a new Vercel project** - you can use your existing Nuxt project
 ## How It Works
 
 1. **Widget files go in `public/widget/`** - Nuxt automatically serves files from the `public/` folder
-2. **Vercel serves these files** - When you deploy, Vercel will serve them at `https://your-app.vercel.app/widget/*`
+2. **Vercel serves these files** - When you deploy, Vercel will serve them at `https://cursor-gamma-tan.vercel.app/widget/*`
 3. **Same domain as your API** - The widget and API are on the same domain, which simplifies CORS
 
 ## Deployment Steps
@@ -43,8 +43,8 @@ Or use the Vercel dashboard to trigger a deployment.
 ### 4. Verify Files Are Accessible
 
 After deployment, check that the files are accessible:
-- `https://your-app.vercel.app/widget/jeremy-chat-widget.iife.js`
-- `https://your-app.vercel.app/widget/nuxt-app.css`
+- `https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js`
+- `https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css`
 
 ### 5. Update Webflow
 
@@ -54,10 +54,10 @@ Use your Vercel URL in the Webflow embed code:
 <div 
   id="jeremy-chat-widget" 
   data-jeremy-chat-widget 
-  data-api-url="https://your-app.vercel.app/api/chat"
-  data-css-url="https://your-app.vercel.app/widget/nuxt-app.css"
+  data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"
+  data-css-url="https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css"
 ></div>
-<script src="https://your-app.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
+<script src="https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
 ```
 
 ## File Structure

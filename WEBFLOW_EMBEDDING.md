@@ -63,18 +63,13 @@ const allowedOrigins = [
 <div 
   id="jeremy-chat-widget-container" 
   data-jeremy-chat-widget 
-  data-api-url="https://your-vercel-app.vercel.app/api/chat"
-  data-css-url="https://your-cdn-url.com/nuxt-app.css"
+  data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"
+  data-css-url="https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css"
 ></div>
 
 <!-- Widget Script -->
-<script src="https://your-cdn-url.com/jeremy-chat-widget.iife.js"></script>
+<script src="https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
 ```
-
-Replace:
-- `https://your-vercel-app.vercel.app/api/chat` with your actual API URL
-- `https://your-cdn-url.com/jeremy-chat-widget.iife.js` with your widget JS file URL
-- `https://your-cdn-url.com/nuxt-app.css` with your widget CSS file URL
 
 **Note**: The widget requires both the CSS and JS files. Using `data-css-url` automatically loads the CSS. Alternatively, you can load the CSS manually with a `<link>` tag.
 
@@ -98,13 +93,13 @@ Replace:
       const container = document.getElementById('jeremy-chat-widget');
       if (container && window.JeremyChatWidget) {
         window.JeremyChatWidget.init('jeremy-chat-widget', {
-          apiUrl: 'https://your-vercel-app.vercel.app/api/chat'
+          apiUrl: 'https://cursor-gamma-tan.vercel.app/api/chat'
         });
       }
     }
   })();
 </script>
-<script src="https://your-cdn-url.com/jeremy-chat-widget.iife.js" defer></script>
+<script src="https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js" defer></script>
 ```
 
 3. Add a div with `id="jeremy-chat-widget"` in your page where you want the widget
@@ -142,7 +137,7 @@ Add this to your Webflow **Custom Code** → **Head Code** or in a **Custom CSS*
 <div 
   id="jeremy-chat-widget" 
   data-jeremy-chat-widget 
-  data-api-url="https://your-vercel-app.vercel.app/api/chat"
+  data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"
   data-theme='{"bgColor":"#ffffff","panelBgColor":"#f5f5f5","textColor":"#000000","borderColor":"#e0e0e0"}'
 ></div>
 ```
@@ -152,7 +147,7 @@ Add this to your Webflow **Custom Code** → **Head Code** or in a **Custom CSS*
 ```javascript
 // Initialize widget programmatically
 window.JeremyChatWidget.init('jeremy-chat-widget', {
-  apiUrl: 'https://your-vercel-app.vercel.app/api/chat',
+  apiUrl: 'https://cursor-gamma-tan.vercel.app/api/chat',
   theme: {
     bgColor: '#1a1c23',
     panelBgColor: '#22242b',

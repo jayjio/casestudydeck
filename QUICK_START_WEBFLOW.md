@@ -32,8 +32,8 @@ This builds the widget and automatically copies the files to `public/widget/` in
 2. **Deploy**: If Vercel is connected to your Git repo, it will automatically deploy. Otherwise, deploy manually via Vercel dashboard or CLI.
 
 3. **Access the widget**: After deployment, the files will be available at:
-   - `https://your-vercel-app.vercel.app/widget/jeremy-chat-widget.iife.js`
-   - `https://your-vercel-app.vercel.app/widget/nuxt-app.css`
+   - `https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js`
+   - `https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css`
 
 **Note**: The build script automatically copies the widget files to `public/widget/` every time you run `npm run build:widget`.
 
@@ -70,18 +70,16 @@ ALLOWED_ORIGINS=https://your-site.com,https://your-other-site.com
 <div 
   id="jeremy-chat-widget" 
   data-jeremy-chat-widget 
-  data-api-url="https://your-vercel-app.vercel.app/api/chat"
-  data-css-url="https://your-vercel-app.vercel.app/widget/nuxt-app.css"
+  data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"
+  data-css-url="https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css"
 ></div>
-<script src="https://your-vercel-app.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
+<script src="https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
 
 <!-- Option 2: Manual CSS loading -->
-<link rel="stylesheet" href="https://your-vercel-app.vercel.app/widget/nuxt-app.css">
-<div id="jeremy-chat-widget" data-jeremy-chat-widget data-api-url="https://your-vercel-app.vercel.app/api/chat"></div>
-<script src="https://your-vercel-app.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
+<link rel="stylesheet" href="https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css">
+<div id="jeremy-chat-widget" data-jeremy-chat-widget data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"></div>
+<script src="https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
 ```
-
-Replace `https://your-vercel-app.vercel.app` with your actual Vercel URL.
 
 **Note**: The widget requires both the CSS file (`nuxt-app.css`) and the JavaScript file (`jeremy-chat-widget.iife.js`). Option 1 automatically loads the CSS, while Option 2 requires you to load it manually.
 

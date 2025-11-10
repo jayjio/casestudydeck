@@ -14,10 +14,8 @@ If you're getting a 404 error when trying to access the widget files, here's how
 ### 2. Verify the Correct URL
 
 After deployment, the widget files should be accessible at:
-- `https://your-vercel-app.vercel.app/widget/jeremy-chat-widget.iife.js`
-- `https://your-vercel-app.vercel.app/widget/nuxt-app.css`
-
-**Note**: Replace `your-vercel-app` with your actual Vercel project name or custom domain.
+- `https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js`
+- `https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css`
 
 ### 3. Verify Files Are in Public Folder
 
@@ -129,10 +127,10 @@ Once the files are accessible, test the widget:
 <div 
   id="jeremy-chat-widget" 
   data-jeremy-chat-widget 
-  data-api-url="https://your-vercel-app.vercel.app/api/chat"
-  data-css-url="https://your-vercel-app.vercel.app/widget/nuxt-app.css"
+  data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"
+  data-css-url="https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css"
 ></div>
-<script src="https://your-vercel-app.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
+<script src="https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js"></script>
 ```
 
 Open browser console and check for:

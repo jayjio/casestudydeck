@@ -38,7 +38,7 @@ The built file will be at: `dist/widget/jeremy-chat-widget.iife.js`
 
 ```javascript
 window.JeremyChatWidget.init('jeremy-chat-widget', {
-  apiUrl: 'https://your-api.com/api/chat',
+  apiUrl: 'https://cursor-gamma-tan.vercel.app/api/chat',
   theme: {
     bgColor: '#1a1c23',
     panelBgColor: '#22242b',
@@ -66,8 +66,8 @@ The widget uses CSS custom properties that can be overridden:
 ### API URL
 
 Set the API URL via:
-1. Data attribute: `data-api-url="https://api.com/chat"`
-2. Programmatic options: `{ apiUrl: 'https://api.com/chat' }`
+1. Data attribute: `data-api-url="https://cursor-gamma-tan.vercel.app/api/chat"`
+2. Programmatic options: `{ apiUrl: 'https://cursor-gamma-tan.vercel.app/api/chat' }`
 3. Default: `/api/chat` (relative URL)
 
 ### Theme

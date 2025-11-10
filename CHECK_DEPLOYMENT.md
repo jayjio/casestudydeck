@@ -31,8 +31,8 @@ In Vercel Dashboard → Your Project → Settings → Domains:
 Once deployment is complete, test these URLs in your browser:
 
 ```
-https://your-project.vercel.app/widget/jeremy-chat-widget.iife.js
-https://your-project.vercel.app/widget/nuxt-app.css
+https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js
+https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css
 ```
 
 You should see:
@@ -75,13 +75,13 @@ In Vercel Dashboard → Your Project → Deployments → Latest → Build Logs:
 
 After deployment completes, open these URLs in your browser:
 
-1. **Widget JS**: `https://your-project.vercel.app/widget/jeremy-chat-widget.iife.js`
+1. **Widget JS**: `https://cursor-gamma-tan.vercel.app/widget/jeremy-chat-widget.iife.js`
    - Should show JavaScript code
    
-2. **Widget CSS**: `https://your-project.vercel.app/widget/nuxt-app.css`
+2. **Widget CSS**: `https://cursor-gamma-tan.vercel.app/widget/nuxt-app.css`
    - Should show CSS code
 
-3. **API Endpoint**: `https://your-project.vercel.app/api/chat`
+3. **API Endpoint**: `https://cursor-gamma-tan.vercel.app/api/chat`
    - Should show an error (that's normal - it needs a POST request)
 
 If all three work, you're good to go! If any show 404, check the deployment status.
