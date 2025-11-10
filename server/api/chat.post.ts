@@ -114,6 +114,7 @@ CRITICAL INSTRUCTIONS - FOLLOW EXACTLY:
    - Blend natural flow with scannability
    - NEVER use markdown formatting (no **, __, *, _, ##, etc.)
    - NEVER use bold, italic, or any text formatting markers
+   - NEVER use em dashes (—) - use regular hyphens (-) or commas instead
    - Output plain text only - no markdown syntax whatsoever
 
 9. TONE REQUIREMENTS:
