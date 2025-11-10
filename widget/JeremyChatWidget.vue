@@ -508,7 +508,7 @@ const handleSubmit = async () => {
   width: 1161px;
   max-width: 100%;
   min-height: auto;
-  padding: 60px 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
