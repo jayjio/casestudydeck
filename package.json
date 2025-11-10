@@ -6,7 +6,7 @@
     "build": "npm run build:widget && nuxt build && npm run copy:widget-to-output",
     "build:widget": "vite build --config widget/vite.config.ts && npm run copy:widget",
     "copy:widget": "mkdir -p public/widget && cp dist/widget/jeremy-chat-widget.iife.js public/widget/ && cp dist/widget/nuxt-app.css public/widget/",
-    "copy:widget-to-output": "mkdir -p .output/public/widget && cp -r public/widget/* .output/public/widget/ 2>/dev/null || true",
+    "copy:widget-to-output": "mkdir -p .output/public/widget && cp public/widget/jeremy-chat-widget.iife.js .output/public/widget/ && cp public/widget/nuxt-app.css .output/public/widget/ || true",
     "dev": "nuxt dev",
     "dev:widget": "vite build --watch --config widget/vite.config.ts",
     "generate": "nuxt generate",
