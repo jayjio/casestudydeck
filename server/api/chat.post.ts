@@ -1,45 +1,15 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { jeremyContext } from '../data/jeremy-context'
 
-// Track random facts to ensure no repeats
-let lastFactNumber = 0
+// Track random facts to ensure sequential ordering with no repeats
+let currentFactIndex = 0 // Track which fact we're on in the current cycle
 const totalFacts = 6 // Total number of "interesting facts" in the context
-let shownFacts: number[] = [] // Track facts shown in current cycle
 
 function getNextFactNumber(): number {
-  // If all facts have been shown, reset and start a new cycle
-  if (shownFacts.length >= totalFacts) {
-    shownFacts = []
-    lastFactNumber = 0 // Reset last fact when starting a new cycle
-  }
+  // Move to the next fact in sequence (1-6)
+  currentFactIndex = (currentFactIndex % totalFacts) + 1
   
-  // Create array of available fact numbers (1 to totalFacts)
-  let availableFacts = Array.from({ length: totalFacts }, (_, i) => i + 1)
-    .filter(factNum => !shownFacts.includes(factNum))
-  
-  // If no available facts (shouldn't happen), reset
-  if (availableFacts.length === 0) {
-    shownFacts = []
-    lastFactNumber = 0 // Reset last fact when resetting
-    availableFacts = Array.from({ length: totalFacts }, (_, i) => i + 1)
-  }
-  
-  // Ensure we don't repeat the last fact shown ONLY if we're in the middle of a cycle
-  // (i.e., if shownFacts.length > 0, meaning we're not at the start of a cycle)
-  if (lastFactNumber > 0 && shownFacts.length > 0 && availableFacts.length > 1 && availableFacts.includes(lastFactNumber)) {
-    // Remove the last fact from available options to ensure no immediate repeat
-    availableFacts = availableFacts.filter(f => f !== lastFactNumber)
-  }
-  
-  // Randomly select from available facts
-  const randomIndex = Math.floor(Math.random() * availableFacts.length)
-  let selectedFact = availableFacts[randomIndex]
-  
-  // Mark this fact as shown
-  shownFacts.push(selectedFact)
-  lastFactNumber = selectedFact
-  
-  return selectedFact
+  return currentFactIndex
 }
 
 export default defineEventHandler(async (event) => {
