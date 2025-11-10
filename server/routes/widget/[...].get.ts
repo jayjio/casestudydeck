@@ -1,5 +1,7 @@
 import { readFile } from 'fs/promises'
 import { join } from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 
 // Serve widget files from /widget/ path
 // This is a fallback in case static file serving doesn't work on Vercel
@@ -15,29 +17,44 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    // Get the project root directory
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = dirname(__filename)
+    const projectRoot = process.cwd()
+    
     // Try multiple possible locations for the file
+    // On Vercel, files might be in different locations
     const possiblePaths = [
-      join(process.cwd(), 'public', 'widget', file), // Development
-      join(process.cwd(), '.output', 'public', 'widget', file), // Production build
-      join(process.cwd(), 'dist', 'widget', file), // Direct build output
+      join(projectRoot, 'public', 'widget', file), // Standard public folder
+      join(projectRoot, '.output', 'public', 'widget', file), // Build output
+      join(projectRoot, 'dist', 'widget', file), // Direct build
+      join(__dirname, '..', '..', '..', 'public', 'widget', file), // Relative from server
+      join(__dirname, '..', '..', '..', '.output', 'public', 'widget', file), // Relative build
     ]
     
     let fileContent
     let found = false
+    let lastError
     
     for (const filePath of possiblePaths) {
       try {
         fileContent = await readFile(filePath)
         found = true
+        console.log(`Found widget file at: ${filePath}`)
         break
-      } catch (e) {
+      } catch (e: any) {
+        lastError = e
         // Try next path
         continue
       }
     }
     
     if (!found) {
-      throw new Error('File not found in any expected location')
+      console.error('Widget file not found. Tried paths:', possiblePaths)
+      console.error('Last error:', lastError)
+      console.error('Current working directory:', process.cwd())
+      console.error('__dirname:', __dirname)
+      throw new Error(`File not found: ${file}. Last error: ${lastError?.message}`)
     }
     
     // Set appropriate headers
@@ -50,11 +67,12 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Access-Control-Allow-Origin', '*')
     
     return fileContent
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error serving widget file:', error)
+    console.error('File requested:', file)
     throw createError({
       statusCode: 404,
-      statusMessage: `File not found: ${file}`
+      statusMessage: `File not found: ${file}. ${error?.message || 'Unknown error'}`
     })
   }
 })

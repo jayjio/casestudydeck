@@ -14,10 +14,17 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // Ensure public assets are served correctly
-    prerender: {
-      // Don't prerender widget files - serve them as static assets
-      ignore: ['/widget/*']
+    // Explicitly configure public assets
+    publicAssets: [
+      {
+        baseURL: '/widget/',
+        dir: 'public/widget',
+        maxAge: 31536000
+      }
+    ],
+    // Ensure public folder is included
+    output: {
+      publicDir: 'public'
     }
   }
 })
