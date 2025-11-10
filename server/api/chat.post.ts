@@ -84,7 +84,7 @@ export default defineEventHandler(async (event) => {
     })
 
     // Detect if this is a random fact question
-    const isRandomFactQuestion = /random.*fact|gimme.*fact|tell me something|interesting fact/i.test(message)
+    const isRandomFactQuestion = /random.*fact|give me.*fact|gimme.*fact|tell me something|interesting fact/i.test(message)
     const currentFactNumber = isRandomFactQuestion ? getNextFactNumber() : null
 
     const response = await anthropic.messages.create({

@@ -211,7 +211,7 @@ const suggestedQueries = [
   'What are you working on right now?',
   'What tools do you use?',
   'What do you do outside of work?',
-  'Gimme a random *random* fact'
+  'Give me a random *random* fact'
 ]
 
 // Animation refs
