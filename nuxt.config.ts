@@ -14,17 +14,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // Explicitly configure public assets
-    publicAssets: [
-      {
-        baseURL: '/widget/',
-        dir: 'public/widget',
-        maxAge: 31536000
-      }
-    ],
-    // Ensure public folder is included
-    output: {
-      publicDir: 'public'
-    }
+    // Nitro automatically serves files from .output/public/
+    // Widget files will be available at /widget/* after build
   }
 })
