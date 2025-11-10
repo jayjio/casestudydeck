@@ -69,37 +69,31 @@
       <div v-if="showLoading" ref="loadingRef" class="loading-container">
         <svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="fogGradient1" cx="30%" cy="30%">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" />
-              <stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" />
-              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
-            </radialGradient>
-            <radialGradient id="fogGradient2" cx="70%" cy="60%">
-              <stop offset="0%" stop-color="rgba(252, 243, 234, 0.12)" />
-              <stop offset="60%" stop-color="rgba(252, 243, 234, 0.03)" />
-              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
-            </radialGradient>
-            <radialGradient id="fogGradient3" cx="50%" cy="80%">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" />
-              <stop offset="50%" stop-color="rgba(255, 255, 255, 0.02)" />
-              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
-            </radialGradient>
-            <radialGradient id="centerGlow">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" />
-              <stop offset="70%" stop-color="rgba(255, 255, 255, 0)" />
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f4d4c0" stop-opacity="0.6" />
+              <stop offset="100%" stop-color="#e6b399" stop-opacity="0.3" />
+            </linearGradient>
+            <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#e6b399" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#f4d4c0" stop-opacity="0.2" />
+            </linearGradient>
+            <radialGradient id="centerGlow" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#f4d4c0" stop-opacity="0.8" />
+              <stop offset="50%" stop-color="#e6b399" stop-opacity="0.4" />
+              <stop offset="100%" stop-color="#e6b399" stop-opacity="0" />
             </radialGradient>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
               <feMerge>
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
           </defs>
-          <circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" />
-          <circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" />
-          <circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" />
-          <circle cx="60" cy="60" r="40" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" />
+          <!-- Abstract organic shapes using gradient colors -->
+          <ellipse cx="60" cy="60" rx="50" ry="35" fill="url(#gradient1)" class="fog-layer-1" />
+          <ellipse cx="60" cy="60" rx="45" ry="40" fill="url(#gradient2)" class="fog-layer-2" />
+          <circle cx="60" cy="60" r="35" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" />
         </svg>
         <p class="loading-text">{{ currentLoadingMessage }}</p>
       </div>
@@ -746,89 +740,76 @@ const handleSubmit = async () => {
 .loading-spinner {
   width: 120px;
   height: 120px;
-  animation: rhythmicPulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: smoothPulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  filter: blur(0.5px);
 }
 
 .fog-layer-1 {
-  animation: foggyRotate1 8s ease-in-out infinite;
+  animation: smoothRotate1 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   transform-origin: center;
+  opacity: 0.7;
 }
 
 .fog-layer-2 {
-  animation: foggyRotate2 10s ease-in-out infinite reverse;
+  animation: smoothRotate2 8s cubic-bezier(0.4, 0, 0.2, 1) infinite reverse;
   transform-origin: center;
-}
-
-.fog-layer-3 {
-  animation: foggyRotate3 6s ease-in-out infinite;
-  transform-origin: center;
+  opacity: 0.6;
 }
 
 .center-glow {
-  animation: innerGlow 2.5s ease-in-out infinite;
+  animation: smoothGlow 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   transform-origin: center;
 }
 
-@keyframes rhythmicPulse {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.4;
+@keyframes smoothPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
   }
-  40% {
-    transform: scale(1.02);
-    opacity: 0.7;
-  }
-  60% {
-    transform: scale(1.02);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0.4;
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
   }
 }
 
-@keyframes foggyRotate1 {
-  0%, 100% {
-    transform: rotate(0deg);
+@keyframes smoothRotate1 {
+  0% {
+    transform: rotate(0deg) scale(1);
     opacity: 0.6;
   }
   50% {
-    transform: rotate(180deg);
-    opacity: 1;
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.6;
   }
 }
 
-@keyframes foggyRotate2 {
-  0%, 100% {
-    transform: rotate(0deg);
+@keyframes smoothRotate2 {
+  0% {
+    transform: rotate(0deg) scale(1);
     opacity: 0.5;
   }
   50% {
-    transform: rotate(-120deg);
-    opacity: 0.9;
-  }
-}
-
-@keyframes foggyRotate3 {
-  0%, 100% {
-    transform: rotate(0deg);
-    opacity: 0.7;
-  }
-  50% {
-    transform: rotate(90deg);
-    opacity: 1;
-  }
-}
-
-@keyframes innerGlow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(0.9);
-  }
-  50% {
+    transform: rotate(-180deg) scale(1.15);
     opacity: 0.8;
-    transform: scale(1.15);
+  }
+  100% {
+    transform: rotate(-360deg) scale(1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes smoothGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
   }
 }
 
