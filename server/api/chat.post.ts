@@ -11,32 +11,26 @@ function getNextFactNumber() {
 }
 
 export default defineEventHandler(async (event) => {
-  // Handle CORS
+  // Handle CORS - Allow all origins for widget embedding
   const origin = getHeader(event, 'origin')
   
-  // Get allowed origins from environment variable or use defaults
-  const envOrigins = process.env.ALLOWED_ORIGINS?.split(',').map(o => o.trim()) || []
-  const defaultOrigins = [
-    'https://www.jeremygio.com',
-    'https://jeremygio.com',
-    'http://localhost:3000',
-    'http://localhost:8888' // Webflow preview
-  ]
-  const allowedOrigins = [...defaultOrigins, ...envOrigins]
-  
-  // In development, allow all origins for easier testing
-  const isDevelopment = process.env.NODE_ENV === 'development'
-  
-  // Set CORS headers
-  if (origin && (allowedOrigins.includes(origin) || isDevelopment)) {
+  // For widget use case, allow CORS from any origin
+  // The API key is server-side, so this is safe
+  if (origin) {
     setHeader(event, 'Access-Control-Allow-Origin', origin)
-    setHeader(event, 'Access-Control-Allow-Methods', 'POST, OPTIONS')
-    setHeader(event, 'Access-Control-Allow-Headers', 'Content-Type')
-    setHeader(event, 'Access-Control-Max-Age', '86400')
+  } else {
+    // If no origin header (e.g., direct API call), allow all
+    setHeader(event, 'Access-Control-Allow-Origin', '*')
   }
+  
+  setHeader(event, 'Access-Control-Allow-Methods', 'POST, OPTIONS, GET')
+  setHeader(event, 'Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  setHeader(event, 'Access-Control-Allow-Credentials', 'true')
+  setHeader(event, 'Access-Control-Max-Age', '86400')
 
-  // Handle OPTIONS request
+  // Handle OPTIONS request (CORS preflight)
   if (event.method === 'OPTIONS') {
+    setHeader(event, 'Content-Type', 'text/plain')
     return { status: 'ok' }
   }
 

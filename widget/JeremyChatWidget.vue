@@ -455,8 +455,21 @@ const handleSubmit = async () => {
     console.error('Error calling API:', error)
     
     // Better error handling and logging
-    const errorMsg = error?.message || 'An error occurred'
-    console.error('Full error details:', error)
+    let errorMsg = 'Failed to fetch'
+    if (error?.message) {
+      errorMsg = error.message
+    } else if (error?.name === 'TypeError' && error?.message?.includes('fetch')) {
+      errorMsg = 'Network error: Could not connect to the API. Please check your connection and try again.'
+    } else if (error?.status) {
+      errorMsg = `API error: ${error.status} - ${error.statusText || 'Unknown error'}`
+    }
+    
+    console.error('Full error details:', {
+      error,
+      message: error?.message,
+      name: error?.name,
+      stack: error?.stack
+    })
     
     errorMessage.value = errorMsg
     animateLoadingOut()
