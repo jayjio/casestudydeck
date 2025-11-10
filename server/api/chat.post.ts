@@ -30,12 +30,7 @@ export default defineEventHandler(async (event) => {
   setHeader(event, 'Access-Control-Max-Age', '86400')
   setHeader(event, 'Vary', 'Origin')
 
-  // Handle OPTIONS request (CORS preflight) - MUST return early with headers
-  if (event.method === 'OPTIONS') {
-    event.node.res.statusCode = 204
-    event.node.res.statusMessage = 'No Content'
-    return ''
-  }
+  // OPTIONS requests are handled by chat.options.ts
 
   const config = useRuntimeConfig()
   const { message, model = 'claude-sonnet-4-20250514' } = await readBody(event)
