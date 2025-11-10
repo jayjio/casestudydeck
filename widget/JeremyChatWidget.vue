@@ -6,9 +6,9 @@
       <div ref="ctaSectionRef" class="cta-section">
         <h1 class="section-title">get to know <span class="gradient-text">[not really]</span> me</h1>
         <p class="section-description">This is an AI tool I built that can answer questions about my experience, work, interests, and who knows what else. Hopefully not my security questions.</p>
-        <p class="section-description tech-item">→For design and dev, I used Figma with the MCP server protocol, Cursor, and Claude Code.</p>
-        <p class="section-description tech-item">→For the LLM, I used the Claude API and an extensive context doc along with Github and Vercel for deployment.</p>
-        <p class="section-description tech-item">→The last step was creating a standalone Vue component embedded into my Webflow site.</p>
+        <p class="section-description tech-item">→ For design and dev, I used Figma with the MCP server protocol, Cursor, and Claude Code.</p>
+        <p class="section-description tech-item">→ For the LLM, I used the Claude API and an extensive context doc along with Github and Vercel for deployment.</p>
+        <p class="section-description tech-item">→ The last step was creating a standalone Vue component embedded into my Webflow site.</p>
         <p class="section-description">Want to hear more about how it was built? Check out the first suggested question down below ↓</p>
         <div class="cta-container">
           <!-- Text Field with Floating Label and Button Inside -->
@@ -548,14 +548,15 @@ const handleSubmit = async () => {
   font-size: 14px;
   line-height: 1.6;
   color: var(--white-color);
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
   text-align: left;
   width: 100%;
   max-width: 817px;
 }
 
 .section-description.tech-item {
-  margin: 0 0 4px 0;
+  margin: 0 0 2px 0;
+  line-height: 1.5;
 }
 
 .section-description:last-of-type {
