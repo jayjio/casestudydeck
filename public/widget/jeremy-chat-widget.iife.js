@@ -10638,7 +10638,7 @@ var JeremyChatWidget = (function(exports) {
                 ref: loadingRef,
                 class: "loading-container"
               }, [
-                _cache[4] || (_cache[4] = createStaticVNode('<div class="mesh-gradient-loader" data-v-1398861c><div class="mesh-gradient-layer mesh-layer-1" data-v-1398861c></div><div class="mesh-gradient-layer mesh-layer-2" data-v-1398861c></div><div class="mesh-gradient-layer mesh-layer-3" data-v-1398861c></div><div class="mesh-gradient-layer mesh-layer-4" data-v-1398861c></div></div>', 1)),
+                _cache[4] || (_cache[4] = createStaticVNode('<svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" data-v-507f4dac><defs data-v-507f4dac><linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%" data-v-507f4dac><stop offset="0%" stop-color="#f4d4c0" stop-opacity="0.6" data-v-507f4dac></stop><stop offset="100%" stop-color="#e6b399" stop-opacity="0.3" data-v-507f4dac></stop></linearGradient><linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%" data-v-507f4dac><stop offset="0%" stop-color="#e6b399" stop-opacity="0.5" data-v-507f4dac></stop><stop offset="100%" stop-color="#f4d4c0" stop-opacity="0.2" data-v-507f4dac></stop></linearGradient><radialGradient id="centerGlow" cx="50%" cy="50%" data-v-507f4dac><stop offset="0%" stop-color="#f4d4c0" stop-opacity="0.8" data-v-507f4dac></stop><stop offset="50%" stop-color="#e6b399" stop-opacity="0.4" data-v-507f4dac></stop><stop offset="100%" stop-color="#e6b399" stop-opacity="0" data-v-507f4dac></stop></radialGradient><filter id="glow" data-v-507f4dac><feGaussianBlur stdDeviation="3" result="coloredBlur" data-v-507f4dac></feGaussianBlur><feMerge data-v-507f4dac><feMergeNode in="coloredBlur" data-v-507f4dac></feMergeNode><feMergeNode in="SourceGraphic" data-v-507f4dac></feMergeNode></feMerge></filter></defs><ellipse cx="60" cy="60" rx="50" ry="35" fill="url(#gradient1)" class="fog-layer-1" data-v-507f4dac></ellipse><ellipse cx="60" cy="60" rx="45" ry="40" fill="url(#gradient2)" class="fog-layer-2" data-v-507f4dac></ellipse><circle cx="60" cy="60" r="35" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" data-v-507f4dac></circle></svg>', 1)),
                 createBaseVNode("p", _hoisted_9, toDisplayString(currentLoadingMessage.value), 1)
               ], 512)) : createCommentVNode("", true),
               aiResponse.value ? (openBlock(), createElementBlock("div", {
@@ -10720,7 +10720,7 @@ var JeremyChatWidget = (function(exports) {
     }
     return target;
   };
-  const JeremyChatWidget2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-1398861c"]]);
+  const JeremyChatWidget2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-507f4dac"]]);
   function injectCSS(cssUrl) {
     if (typeof document === "undefined") return;
     const existingLink = document.querySelector("link[data-jeremy-chat-widget-css]");

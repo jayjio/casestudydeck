@@ -69,12 +69,34 @@
 
       <!-- Loading Animation -->
       <div v-if="showLoading" ref="loadingRef" class="loading-container">
-        <div class="mesh-gradient-loader">
-          <div class="mesh-gradient-layer mesh-layer-1"></div>
-          <div class="mesh-gradient-layer mesh-layer-2"></div>
-          <div class="mesh-gradient-layer mesh-layer-3"></div>
-          <div class="mesh-gradient-layer mesh-layer-4"></div>
-        </div>
+        <svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f4d4c0" stop-opacity="0.6" />
+              <stop offset="100%" stop-color="#e6b399" stop-opacity="0.3" />
+            </linearGradient>
+            <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#e6b399" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#f4d4c0" stop-opacity="0.2" />
+            </linearGradient>
+            <radialGradient id="centerGlow" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#f4d4c0" stop-opacity="0.8" />
+              <stop offset="50%" stop-color="#e6b399" stop-opacity="0.4" />
+              <stop offset="100%" stop-color="#e6b399" stop-opacity="0" />
+            </radialGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Abstract organic shapes using gradient colors -->
+          <ellipse cx="60" cy="60" rx="50" ry="35" fill="url(#gradient1)" class="fog-layer-1" />
+          <ellipse cx="60" cy="60" rx="45" ry="40" fill="url(#gradient2)" class="fog-layer-2" />
+          <circle cx="60" cy="60" r="35" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" />
+        </svg>
         <p class="loading-text">{{ currentLoadingMessage }}</p>
       </div>
 
@@ -668,133 +690,79 @@ html, body {
   width: 100%;
 }
 
-.mesh-gradient-loader {
-  width: 200px;
-  height: 200px;
-  position: relative;
-  border-radius: 50%;
-  overflow: visible;
-  filter: blur(35px);
-  animation: meshPulse 4s ease-in-out infinite;
-  opacity: 0.95;
+.loading-spinner {
+  width: 120px;
+  height: 120px;
+  animation: smoothPulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  filter: blur(0.5px);
 }
 
-.mesh-gradient-layer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  mix-blend-mode: screen;
-  opacity: 0.8;
+.fog-layer-1 {
+  animation: smoothRotate1 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: center;
+  opacity: 0.7;
 }
 
-.mesh-layer-1 {
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(244, 212, 192, 0.8) 0%,
-    rgba(230, 179, 153, 0.4) 50%,
-    transparent 100%
-  );
-  animation: meshMove1 8s ease-in-out infinite;
-  transform-origin: 30% 30%;
+.fog-layer-2 {
+  animation: smoothRotate2 8s cubic-bezier(0.4, 0, 0.2, 1) infinite reverse;
+  transform-origin: center;
+  opacity: 0.6;
 }
 
-.mesh-layer-2 {
-  background: radial-gradient(
-    circle at 70% 70%,
-    rgba(230, 179, 153, 0.8) 0%,
-    rgba(244, 212, 192, 0.4) 50%,
-    transparent 100%
-  );
-  animation: meshMove2 10s ease-in-out infinite;
-  transform-origin: 70% 70%;
-}
-
-.mesh-layer-3 {
-  background: radial-gradient(
-    circle at 50% 20%,
-    rgba(244, 212, 192, 0.6) 0%,
-    rgba(230, 179, 153, 0.3) 40%,
-    transparent 80%
-  );
-  animation: meshMove3 12s ease-in-out infinite;
-  transform-origin: 50% 20%;
-}
-
-.mesh-layer-4 {
-  background: conic-gradient(
-    from 45deg at 50% 50%,
-    rgba(244, 212, 192, 0.5) 0deg,
-    rgba(230, 179, 153, 0.6) 90deg,
-    rgba(244, 212, 192, 0.4) 180deg,
-    rgba(230, 179, 153, 0.5) 270deg,
-    rgba(244, 212, 192, 0.5) 360deg
-  );
-  animation: meshRotate 15s linear infinite;
+.center-glow {
+  animation: smoothGlow 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   transform-origin: center;
 }
 
-@keyframes meshPulse {
+@keyframes smoothPulse {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.9;
+    opacity: 0.8;
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.08);
     opacity: 1;
   }
 }
 
-@keyframes meshMove1 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.7;
-  }
-  33% {
-    transform: translate(20px, -15px) scale(1.2);
-    opacity: 0.9;
-  }
-  66% {
-    transform: translate(-15px, 20px) scale(0.9);
-    opacity: 0.6;
-  }
-}
-
-@keyframes meshMove2 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.7;
-  }
-  33% {
-    transform: translate(-20px, 15px) scale(0.9);
-    opacity: 0.6;
-  }
-  66% {
-    transform: translate(15px, -20px) scale(1.2);
-    opacity: 0.9;
-  }
-}
-
-@keyframes meshMove3 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(10px, 25px) scale(1.15);
-    opacity: 0.8;
-  }
-}
-
-@keyframes meshRotate {
+@keyframes smoothRotate1 {
   0% {
     transform: rotate(0deg) scale(1);
+    opacity: 0.6;
   }
   50% {
     transform: rotate(180deg) scale(1.1);
+    opacity: 0.9;
   }
   100% {
     transform: rotate(360deg) scale(1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes smoothRotate2 {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(-180deg) scale(1.15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(-360deg) scale(1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes smoothGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
   }
 }
 
@@ -1244,10 +1212,9 @@ html, body {
     line-height: 1.7;
   }
 
-  .mesh-gradient-loader {
-    width: 120px;
-    height: 120px;
-    filter: blur(30px);
+  .loading-spinner {
+    width: 80px;
+    height: 80px;
   }
 
   .loading-text {
@@ -1292,8 +1259,10 @@ html, body {
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
-  .mesh-gradient-loader,
-  .mesh-gradient-layer {
+  .loading-spinner,
+  .fog-layer-1,
+  .fog-layer-2,
+  .center-glow {
     animation: none;
   }
 }
