@@ -40,9 +40,8 @@
               @click="handleSubmit"
               :disabled="isLoading"
             >
-              <span class="cta-text">Ask</span>
-              <svg v-if="!isLoading" class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg v-if="!isLoading" class="arrow-icon-submit" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5L12 19M12 5L7 10M12 5L17 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
           </div>
@@ -119,8 +118,16 @@
       <div v-if="aiResponse" ref="askAnotherRef" class="ask-another-container">
         <button class="ask-another-button" @click="scrollToTop">
           <span class="ask-another-text">Ask another</span>
-          <svg class="arrow-icon-up" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 1L9 13M9 1L15 7M9 1L3 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg class="cycle-icon-refresh" width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 9C2 5.13401 5.13401 2 9 2C11.6651 2 13.9627 3.50409 15.0737 5.68198M16 9C16 12.866 12.866 16 9 16C6.33488 16 4.03725 14.4959 2.92627 12.318M15.0737 5.68198L16 2M15.0737 5.68198L11.5 5M2.92627 12.318L2 16M2.92627 12.318L6.5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- Next Fact Button - Only shows after random fact response -->
+        <button v-if="isRandomFactResponse" class="another-fact-button" @click="getAnotherFact">
+          <span class="another-fact-text">Next fact</span>
+          <svg class="arrow-icon-right" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
       </div>
@@ -142,6 +149,7 @@ const errorMessage = ref('')
 const lastQuery = ref('')
 const hasSearched = ref(false)
 const loadingMessageIndex = ref(0)
+const isRandomFactResponse = ref(false)
 
 // Loading messages that cycle through
 const loadingMessages = [
@@ -197,6 +205,7 @@ const placeholderText = computed(() => {
 // Suggested queries
 const suggestedQueries = [
   'How did you build this tool?',
+  'What\'s your favorite project you\'ve worked on?',
   'What\'s your experience and background?',
   'What do you value as a designer?',
   'What are you working on right now?',
@@ -225,6 +234,7 @@ const focusInput = () => {
     aiResponse.value = ''
     lastQuery.value = ''
     hasSearched.value = false
+    isRandomFactResponse.value = false
   }
   inputRef.value?.focus()
 }
@@ -235,6 +245,7 @@ const scrollToTop = () => {
   aiResponse.value = ''
   lastQuery.value = ''
   hasSearched.value = false
+  isRandomFactResponse.value = false
 
   // Scroll the CTA section into view
   if (ctaSectionRef.value) {
@@ -248,6 +259,12 @@ const scrollToTop = () => {
   setTimeout(() => {
     inputRef.value?.focus()
   }, 500)
+}
+
+const getAnotherFact = () => {
+  // Set the input value to trigger another random fact
+  inputValue.value = 'Gimme a random *random* fact'
+  handleSubmit()
 }
 
 const selectSuggestedQuery = (query: string) => {
@@ -267,12 +284,7 @@ const animateCtaOut = () => {
     }
   })
 
-  // Animate CTA section up (to top of viewport)
-  timeline.to(ctaSectionRef.value, {
-    y: -64,
-    duration: 0.8,
-    ease: 'power2.inOut'
-  })
+  // Keep CTA section in place (no sliding animation)
 }
 
 // Animate loading in
@@ -383,6 +395,7 @@ const handleSubmit = async () => {
     if (response.success) {
       aiResponse.value = response.response
       hasSearched.value = true
+      isRandomFactResponse.value = response.isRandomFact || false
       // Hide loading and show response
       animateLoadingOut()
       // Wait for loading to finish animating out
@@ -446,10 +459,10 @@ html, body {
   --text-field-stroke-color: #363944;
   --panel-corner-radius: 12px;
   --inner-corner-radius: 6px;
-  --textfield-padding-lr: 21px;
-  --textfield-padding-tb: 33px;
-  --tag-container-padding-lr: 31px;
-  --tag-container-pad-tb: 15px;
+  --textfield-padding-lr: 24px;
+  --textfield-padding-tb: 24px;
+  --tag-container-padding-lr: 24px;
+  --tag-container-pad-tb: 24px;
   --tag-corner-rad: 60px;
   
   background-color: var(--bg-color);
@@ -517,12 +530,12 @@ html, body {
   border: 1px solid var(--text-field-stroke-color);
   border-radius: var(--panel-corner-radius);
   padding: var(--textfield-padding-tb) var(--textfield-padding-lr);
-  padding-right: 180px; /* Make room for button */
+  padding-right: 80px; /* Make room for button */
   position: relative;
   cursor: text;
   transition: border-color 0.3s ease;
   overflow: visible;
-  min-height: 92px;
+  min-height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -553,8 +566,8 @@ html, body {
 
 .floating-label.floating {
   font-size: 14px;
-  top: 16px;
-  transform: translateY(0);
+  top: 50%;
+  transform: translateY(-50%) translateY(-10px);
   font-weight: 500;
   color: #b0b4c4;
   animation: none;
@@ -572,58 +585,50 @@ html, body {
   line-height: 40px;
   color: #fcf3ea;
   padding: 0;
-  margin-top: 4px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(0);
 }
 
 .text-field-open.is-focused .text-input {
   opacity: 1;
+  transform: translateY(10px);
 }
 
 /* CTA Button */
 .cta-button {
   position: absolute;
-  right: 21px;
+  right: 24px;
   top: 50%;
   transform: translateY(-50%);
-  background-color: transparent;
-  border: 2px solid var(--white-color);
-  border-radius: 60px;
+  background: linear-gradient(135deg, #f4d4c0 0%, #e6b399 100%);
+  border: none;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
-  padding: 12px 21px;
-  height: 52px;
-  width: 154px;
+  padding: 0;
+  height: 44px;
+  width: 44px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .cta-button:hover {
-  background-color: rgba(252, 243, 234, 0.1);
+  background: linear-gradient(135deg, #f5dccb 0%, #ebb89e 100%);
   transform: translateY(-50%) translateY(-2px);
-  box-shadow: 0 4px 12px rgba(252, 243, 234, 0.2);
+  box-shadow: 0 4px 12px rgba(230, 179, 153, 0.4);
 }
 
 .cta-button:active {
   transform: translateY(-50%) translateY(0);
+  background: linear-gradient(135deg, #f0ccb5 0%, #dfa688 100%);
 }
 
-.cta-text {
-  font-family: 'Sora', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: normal;
-  color: #fcf3ea;
-  white-space: nowrap;
-}
-
-.arrow-icon {
-  width: 17.5px;
-  height: 13.5px;
-  color: var(--white-color);
+.arrow-icon-submit {
+  width: 20px;
+  height: 20px;
+  color: #1b1e2e;
 }
 
 /* Error Message */
@@ -836,7 +841,7 @@ html, body {
 
 /* Disabled button state */
 .cta-button:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: translateY(-50%);
 }
@@ -844,7 +849,7 @@ html, body {
 .cta-button:disabled:hover {
   transform: translateY(-50%);
   box-shadow: none;
-  background-color: transparent;
+  background: linear-gradient(135deg, #f4d4c0 0%, #e6b399 100%);
 }
 
 /* Fixed Footer Cards */
@@ -948,12 +953,14 @@ html, body {
   transform: translateX(2px);
 }
 
+
 /* Ask Another Button */
 .ask-another-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 16px;
   margin-top: 24px;
   padding: 0 20px;
 }
@@ -991,11 +998,50 @@ html, body {
   white-space: nowrap;
 }
 
-.arrow-icon-up {
-  width: 14px;
-  height: 18px;
+.cycle-icon-refresh {
+  width: 16px;
+  height: 16px;
   color: var(--white-color);
-  transform: rotate(0deg);
+}
+
+/* Another Fact Button */
+.another-fact-button {
+  background-color: transparent;
+  border: 2px solid var(--white-color);
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 24px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.another-fact-button:hover {
+  background-color: rgba(252, 243, 234, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(252, 243, 234, 0.2);
+}
+
+.another-fact-button:active {
+  transform: translateY(0);
+}
+
+.another-fact-text {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: normal;
+  color: #fcf3ea;
+  white-space: nowrap;
+}
+
+.arrow-icon-right {
+  width: 17.5px;
+  height: 13.5px;
+  color: var(--white-color);
 }
 
 /* Responsive adjustments */
@@ -1018,35 +1064,33 @@ html, body {
 
   .text-field-open {
     width: 100%;
-    min-height: 140px;
-    padding-right: var(--textfield-padding-lr);
-    padding-bottom: 70px;
+    min-height: 80px;
+    padding-right: 80px;
   }
 
   .cta-button {
     position: absolute;
-    bottom: 21px;
-    left: 50%;
-    top: auto;
-    transform: translateX(-50%);
-    width: calc(100% - 42px);
-    height: 52px;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
   }
 
   .cta-button:hover {
-    transform: translateX(-50%) translateY(-2px);
+    transform: translateY(-50%) translateY(-2px);
   }
 
   .cta-button:active {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(-50%) translateY(0);
   }
 
   .cta-button:disabled {
-    transform: translateX(-50%);
+    transform: translateY(-50%);
   }
 
   .cta-button:disabled:hover {
-    transform: translateX(-50%);
+    transform: translateY(-50%);
   }
 }
 
@@ -1073,39 +1117,35 @@ html, body {
   }
 
   .text-field-open {
-    min-height: 140px;
-    padding-right: var(--textfield-padding-lr);
-    padding-bottom: 70px;
+    min-height: 80px;
+    padding-right: 80px;
     font-size: 16px;
   }
 
   .cta-button {
     position: absolute;
-    bottom: 21px;
-    left: 50%;
-    top: auto;
-    transform: translateX(-50%);
-    width: calc(100% - 42px);
-    min-height: 52px;
-    height: 52px;
-    font-size: 16px;
-    padding: 12px 20px;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
   }
 
   .cta-button:hover {
-    transform: translateX(-50%) translateY(-2px);
+    transform: translateY(-50%) translateY(-2px);
   }
 
   .cta-button:active {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(-50%) translateY(0);
   }
 
   .cta-button:disabled {
-    transform: translateX(-50%);
+    transform: translateY(-50%);
+    opacity: 0.5;
   }
 
   .cta-button:disabled:hover {
-    transform: translateX(-50%);
+    transform: translateY(-50%);
   }
 
   .floating-label {
@@ -1174,6 +1214,13 @@ html, body {
 
   .ask-another-container {
     margin-top: 20px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .another-fact-button {
+    width: 100%;
+    max-width: 300px;
   }
 }
 

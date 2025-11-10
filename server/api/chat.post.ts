@@ -1,6 +1,15 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { jeremyContext } from '../data/jeremy-context'
 
+// In-memory counter for cycling through random facts
+let factCounter = 0
+const totalFacts = 6 // Total number of "interesting facts" in the context
+
+function getNextFactNumber() {
+  factCounter = (factCounter % totalFacts) + 1
+  return factCounter
+}
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const { message, model = 'claude-sonnet-4-20250514' } = await readBody(event)
@@ -23,6 +32,10 @@ export default defineEventHandler(async (event) => {
     const anthropic = new Anthropic({
       apiKey: config.anthropicApiKey
     })
+
+    // Detect if this is a random fact question
+    const isRandomFactQuestion = /random.*fact|gimme.*fact|tell me something|interesting fact/i.test(message)
+    const currentFactNumber = isRandomFactQuestion ? getNextFactNumber() : null
 
     const response = await anthropic.messages.create({
       model: model,
@@ -61,11 +74,10 @@ CRITICAL INSTRUCTIONS - FOLLOW EXACTLY:
    - Keep it human and conversational
 
 10. RANDOM FACTS PROTOCOL:
-   - Facts are numbered (first, second, third, etc.)
-   - Cycle through them in order
-   - Track which fact you last shared
-   - Provide the next one in sequence
-   - Never repeat the same fact consecutively
+   ${currentFactNumber ? `- You MUST share interesting fact #${currentFactNumber} (look for "NOTE FOR CHATGPT: Use as 'interesting fact' ${['first', 'second', 'third', 'fourth', 'fifth', 'sixth'][currentFactNumber - 1]}")` : '- Facts are numbered (first, second, third, fourth, fifth, sixth) in the ## Personal Interests and Lifestyle section'}
+   - Only share the specific fact indicated above
+   - Keep it conversational and in first person
+   - Don't mention the fact number to the user
 
 11. PARAPHRASING MANDATE:
    - NEVER copy text directly from context file
@@ -110,6 +122,13 @@ When asked "How did you build this tool?" or similar questions about building th
 - Keep the exact structure and formatting from the context document
 - This is an exception to the paraphrasing rule - copy verbatim
 
+When asked "What's your favorite project you've worked on?" or similar questions about favorite projects:
+- Reference the ## Favorite project section but PARAPHRASE somewhat - keep it mostly the same
+- Also reference the case study at https://www.jeremygio.com/sam-app
+- Highlight: working on a real problem with PhD founders, doing the whole of it including award-winning branding, and being a part of user feedback and iterating based on real feedback with users with chronic conditions
+- Keep it conversational in FIRST PERSON - speak as yourself (Jeremy)
+- Emphasize the end-to-end ownership and real-world impact
+
 ${jeremyContext}`,
       messages: [
         {
@@ -127,7 +146,8 @@ ${jeremyContext}`,
       success: true,
       response: responseText,
       model: response.model,
-      usage: response.usage
+      usage: response.usage,
+      isRandomFact: isRandomFactQuestion
     }
   } catch (error: any) {
     console.error('Anthropic API Error:', error)
