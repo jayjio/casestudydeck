@@ -738,7 +738,7 @@ const handleSubmit = async () => {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-top: -40px;
+  margin-top: 32px;
   padding: 40px;
   width: 100%;
 }

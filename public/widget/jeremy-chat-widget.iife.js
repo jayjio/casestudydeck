@@ -10495,6 +10495,7 @@ var JeremyChatWidget = (function(exports) {
         }
       };
       const handleSubmit = () => __async(null, null, function* () {
+        var _a;
         if (!inputValue.value.trim()) {
           errorMessage.value = "Please enter a question";
           return;
@@ -10544,8 +10545,20 @@ var JeremyChatWidget = (function(exports) {
           }
         } catch (error) {
           console.error("Error calling API:", error);
-          const errorMsg = (error == null ? void 0 : error.message) || "An error occurred";
-          console.error("Full error details:", error);
+          let errorMsg = "Failed to fetch";
+          if (error == null ? void 0 : error.message) {
+            errorMsg = error.message;
+          } else if ((error == null ? void 0 : error.name) === "TypeError" && ((_a = error == null ? void 0 : error.message) == null ? void 0 : _a.includes("fetch"))) {
+            errorMsg = "Network error: Could not connect to the API. Please check your connection and try again.";
+          } else if (error == null ? void 0 : error.status) {
+            errorMsg = `API error: ${error.status} - ${error.statusText || "Unknown error"}`;
+          }
+          console.error("Full error details:", {
+            error,
+            message: error == null ? void 0 : error.message,
+            name: error == null ? void 0 : error.name,
+            stack: error == null ? void 0 : error.stack
+          });
           errorMessage.value = errorMsg;
           animateLoadingOut();
           setTimeout(() => {
@@ -10625,7 +10638,7 @@ var JeremyChatWidget = (function(exports) {
                 ref: loadingRef,
                 class: "loading-container"
               }, [
-                _cache[4] || (_cache[4] = createStaticVNode('<svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" data-v-fb376bc6><defs data-v-fb376bc6><radialGradient id="fogGradient1" cx="30%" cy="30%" data-v-fb376bc6><stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" data-v-fb376bc6></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" data-v-fb376bc6></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-fb376bc6></stop></radialGradient><radialGradient id="fogGradient2" cx="70%" cy="60%" data-v-fb376bc6><stop offset="0%" stop-color="rgba(252, 243, 234, 0.12)" data-v-fb376bc6></stop><stop offset="60%" stop-color="rgba(252, 243, 234, 0.03)" data-v-fb376bc6></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-fb376bc6></stop></radialGradient><radialGradient id="fogGradient3" cx="50%" cy="80%" data-v-fb376bc6><stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" data-v-fb376bc6></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.02)" data-v-fb376bc6></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-fb376bc6></stop></radialGradient><radialGradient id="centerGlow" data-v-fb376bc6><stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" data-v-fb376bc6></stop><stop offset="70%" stop-color="rgba(255, 255, 255, 0)" data-v-fb376bc6></stop></radialGradient><filter id="glow" data-v-fb376bc6><feGaussianBlur stdDeviation="2" result="coloredBlur" data-v-fb376bc6></feGaussianBlur><feMerge data-v-fb376bc6><feMergeNode in="coloredBlur" data-v-fb376bc6></feMergeNode><feMergeNode in="SourceGraphic" data-v-fb376bc6></feMergeNode></feMerge></filter></defs><circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" data-v-fb376bc6></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" data-v-fb376bc6></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" data-v-fb376bc6></circle><circle cx="60" cy="60" r="40" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" data-v-fb376bc6></circle></svg>', 1)),
+                _cache[4] || (_cache[4] = createStaticVNode('<svg class="loading-spinner" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" data-v-7f24ae17><defs data-v-7f24ae17><radialGradient id="fogGradient1" cx="30%" cy="30%" data-v-7f24ae17><stop offset="0%" stop-color="rgba(255, 255, 255, 0.15)" data-v-7f24ae17></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.05)" data-v-7f24ae17></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-7f24ae17></stop></radialGradient><radialGradient id="fogGradient2" cx="70%" cy="60%" data-v-7f24ae17><stop offset="0%" stop-color="rgba(252, 243, 234, 0.12)" data-v-7f24ae17></stop><stop offset="60%" stop-color="rgba(252, 243, 234, 0.03)" data-v-7f24ae17></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-7f24ae17></stop></radialGradient><radialGradient id="fogGradient3" cx="50%" cy="80%" data-v-7f24ae17><stop offset="0%" stop-color="rgba(255, 255, 255, 0.1)" data-v-7f24ae17></stop><stop offset="50%" stop-color="rgba(255, 255, 255, 0.02)" data-v-7f24ae17></stop><stop offset="100%" stop-color="rgba(255, 255, 255, 0)" data-v-7f24ae17></stop></radialGradient><radialGradient id="centerGlow" data-v-7f24ae17><stop offset="0%" stop-color="rgba(255, 255, 255, 0.12)" data-v-7f24ae17></stop><stop offset="70%" stop-color="rgba(255, 255, 255, 0)" data-v-7f24ae17></stop></radialGradient><filter id="glow" data-v-7f24ae17><feGaussianBlur stdDeviation="2" result="coloredBlur" data-v-7f24ae17></feGaussianBlur><feMerge data-v-7f24ae17><feMergeNode in="coloredBlur" data-v-7f24ae17></feMergeNode><feMergeNode in="SourceGraphic" data-v-7f24ae17></feMergeNode></feMerge></filter></defs><circle cx="60" cy="60" r="55" fill="url(#fogGradient1)" class="fog-layer-1" data-v-7f24ae17></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient2)" class="fog-layer-2" data-v-7f24ae17></circle><circle cx="60" cy="60" r="55" fill="url(#fogGradient3)" class="fog-layer-3" data-v-7f24ae17></circle><circle cx="60" cy="60" r="40" fill="url(#centerGlow)" class="center-glow" filter="url(#glow)" data-v-7f24ae17></circle></svg>', 1)),
                 createBaseVNode("p", _hoisted_9, toDisplayString(currentLoadingMessage.value), 1)
               ], 512)) : createCommentVNode("", true),
               aiResponse.value ? (openBlock(), createElementBlock("div", {
@@ -10707,7 +10720,7 @@ var JeremyChatWidget = (function(exports) {
     }
     return target;
   };
-  const JeremyChatWidget2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-fb376bc6"]]);
+  const JeremyChatWidget2 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7f24ae17"]]);
   function injectCSS(cssUrl) {
     if (typeof document === "undefined") return;
     const existingLink = document.querySelector("link[data-jeremy-chat-widget-css]");
