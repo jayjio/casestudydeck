@@ -284,7 +284,12 @@ const animateCtaOut = () => {
     }
   })
 
-  // Keep CTA section in place (no sliding animation)
+  // Animate CTA section up (to top of viewport)
+  timeline.to(ctaSectionRef.value, {
+    y: -64,
+    duration: 0.8,
+    ease: 'power2.inOut'
+  })
 }
 
 // Animate loading in
