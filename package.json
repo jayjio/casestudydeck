@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "npm run build:widget && nuxt build",
     "build:widget": "vite build --config widget/vite.config.ts && npm run copy:widget",
     "copy:widget": "mkdir -p public/widget && cp dist/widget/jeremy-chat-widget.iife.js public/widget/ && cp dist/widget/nuxt-app.css public/widget/",
     "dev": "nuxt dev",
