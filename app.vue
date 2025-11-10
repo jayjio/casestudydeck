@@ -53,6 +53,7 @@
             v-for="(query, index) in suggestedQueries"
             :key="index"
             class="suggested-query-item"
+            :class="{ 'suggested-query-item-special': query.includes('How did you build this tool') }"
             @click.prevent="selectSuggestedQuery(query)"
           >
             {{ query }}
@@ -959,6 +960,30 @@ html, body {
 
 .suggested-query-item:active {
   transform: translateX(2px);
+}
+
+.suggested-query-item-special {
+  background: var(--bg-color);
+  border: 2px solid transparent;
+  background-image: 
+    linear-gradient(var(--bg-color), var(--bg-color)),
+    linear-gradient(135deg, #f4d4c0 0%, #e6b399 100%);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  color: var(--white-color);
+  font-weight: 400;
+}
+
+.suggested-query-item.suggested-query-item-special:hover {
+  background: linear-gradient(135deg, #f5dccb 0%, #ebb89e 100%) !important;
+  background-image: linear-gradient(135deg, #f5dccb 0%, #ebb89e 100%) !important;
+  background-clip: padding-box !important;
+  background-origin: padding-box !important;
+  border: 2px solid transparent !important;
+  border-color: transparent !important;
+  color: #1b1e2e !important;
+  font-weight: 600;
+  transform: translateX(4px);
 }
 
 

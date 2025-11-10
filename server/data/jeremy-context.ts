@@ -12,10 +12,10 @@ export const jeremyContext = `
 ## Snapshot
 Name: Jeremy Giovannetti
 Experience: Senior/Lead-level product design on a range of diverse domains. Led the end-to-end product design process from research to launch, with design leadership roles
-Background:  Over 6 years of experience product/UI/UX design experience, 10+ years as a creative 
+Background: Over 6 years of product/UI/UX design experience, 10+ years as a creative 
 
 Identity as a professional: Product/UX designer and creative leader who ships quickly, iterates fast, and enjoys complex, constraint-heavy problems. Enjoys solving complex problems with talented teams.
-Wants to join a team that values growth, and solving meaningful problems, wants to be a part of team that he can continue to learn from.
+Wants to join a team that values growth and solving meaningful problems, wants to be a part of a team that he can continue to learn from.
 Style: Concise, practical, detail-oriented; values speed with quality, strong cross-functional collaboration, and measurable outcomes.
 
 ## Values and Design Philosophy NOTE FOR CLAUDE: DO NOT REPHRASE THIS ONE, but only this section.
@@ -35,27 +35,31 @@ Style: Concise, practical, detail-oriented; values speed with quality, strong cr
 ## Career Timeline and Highlights:
 Note: Dates reflect best-known info from prior conversations and public sources; some items are approximate.
 
-Aug 2019 – Present: at Primitive, a full service design agency with embedded web and software teams; product design leadership on web/mobile initiatives; brand/system work; shipped brand relaunch and motion deliverables in collaboration with external partners. Award winning work both in Logo design and Web design. Won an Addy for the Sam logo design, and web design.
+Aug 2019 – Present: at Primitive, a full service design agency with embedded web and software teams; product design leadership on web/mobile initiatives; brand/system work; shipped brand relaunch and motion deliverables in collaboration with external partners. Award-winning work in both logo design and web design. Won an Addy for the Sam logo design and web design.
 
 2014 – Jan 2020: Artist / Project Manager, Gio Studio; hands-on creative + client/service coordination.
 
 Other roles: Design Director; UX Design Lead; Product Designer; Product Design Intern.
 
-## AI Tool build Process:
-This started as a learning project to understand how these AI tools work together, and evolved into something useful for my portfolio site, an agent that can speak about my work and background for me.
+## AI Tool Build Process:
+This started as a learning project to understand how these AI tools work in more depth, along with how to integrate them together and into my workflow. It then evolved into something useful for my portfolio site, an agent that can speak about my work and background for me.
 
 The Tools
-I designed in Figma ensuring proper auto layout, which let me pull directly into Cursor via Figma's MCP servers with the styling intact (mostly). I integrated Claude Code into Cursor and used both in tandem for the build, Claude's API for the LLM (it's just the best hands down), and deployed through GitHub and Vercel. Right now it's embedded via iframe on my Webflow site.
+I initially designed in Figma ensuring proper auto layout, which let me pull directly into Cursor via Figma's MCP servers with the styling (mostly) intact. I integrated Claude Code into Cursor and used both in tandem for the build, Claude's API for the LLM (it's just the best hands down for me), and deployed through GitHub and Vercel. Right now it's embedded via an iframe on my Webflow site.
 
 The Challenge
-The trickiest parts were twofold. First, getting the LLMs to stop bullshitting is a never ending battle. It was also difficult to design it well enough for the scalability that comes along with open-ended questions. Lots of rules. I used an extensive context document that includes my case studies, research papers, text transcripts of me speaking, and other pieces of content to set the agent up with enough to work with. And more rules.
+There were two tricky parts. 
+First, getting LLMs to stop bullshitting is a never-ending battle. It was also difficult to set it up for the scalability that comes along with open-ended questions. Lots of rules. 
+I ended up using an extensive context document that includes my case studies, research papers, text transcripts of me speaking, and other pieces of content to set the API up with enough to work with. Then more rules. Testing. Some more rules.
 
-The other side of it is getting the design exactly right through is still tedious. That being said, its ability far surpassed my expectation, even when I gave it more ambiguous direction.
+The other challenging aspect was getting the design exactly right, which is sometimes tedious, but instead of 2 steps forward one step back, it's more like 5 steps forward, one step back. 
+Overall, Cursor and Claude Code's ability far surpassed my expectations, even when I gave more ambiguous direction. 
+In the end, I was testing changes in the inspect tool, and then iterating directly in Cursor. I did not go back into Figma after the initial starting point.
 
 What I Learned
-Cursor and Claude Code are genuinely transformative. We're watching product development fundamentally change in real time, and it's exciting to be part of that shift. I also learned how much time I wasted redesigning my site in Webflow not 3 weeks ago.
+Cursor and Claude Code are genuinely transformative. We're watching product development fundamentally change in real time, and it's exciting to be part of that shift. I also learned how much time I wasted redesigning my site in Webflow.
 
-Happy to discuss the technical details or organizational applications if you're curious. Just reach out!
+I'm happy to discuss the technical details or organizational applications if you're curious. Just reach out!
 
 ## Education and Certifications: 2019 Texas Tech University
 Advertising (Design Focus)
@@ -78,7 +82,7 @@ UX + Product Discovery
 
 
 Creative Direction Certificate
-Elvtr | Randy Stien | Oglivy
+Elvtr | Randy Stein | Ogilvy
 Coursework:
 Leadership + Team Management
 Pitching + Presentation
@@ -112,7 +116,7 @@ Platforms: iOS, Android, responsive web applications; provider portals; dashboar
 - Working style: Fast cycles, bias to ship, structured critique,
 
 ## Favorite project
-My favorite project has to be the SAM mobile app. This is a mobile app for users with chronic consitions to manage their condition by generating a custom meal plan for them based on their demographics, consition(s), preferences, allergies, and other parameters. IT also generates a grocery list for them and goes beyond just the "what" to educate the user to create sustainable change.  This was my favorite because I got to work with domain experts, PhD founders, and on an idea that had a lot of validity in the space, filling a need in the current healthcare market, filling a true gap in the market, delivering real value to people who needed it. I would say another reason is that I got to really own and be a part of the whole process. So from I actually developed the branding, I designed the logo and the brand guidelines and the overall brand identity. I won an award for that logo, an Addy Award. And the website also won an Addy Award, which I got to also be a part of. And so I got to do the branding. I got to do the really zero-to-one build, so concepting, really taking a concept and bringing it to life. Wireframing, interaction design, information architecture. I got to be a part of the usability testing with target users, people with chronic conditions, and iterate based on that feedback. I got to see real people use my prototype and give real feedback and take that into account and make changes based on it, which was very cool, and then do the same thing with the actual live app. And so overall, I believe it was my favorite project because it was three amazing founders with a great idea that I got to be a part of, and I believe it truly made an impact. And it was something that I just loved working on.
+My favorite project has to be the SAM mobile app. This is a mobile app for users with chronic conditions to manage their condition by generating a custom meal plan for them based on their demographics, condition(s), preferences, allergies, and other parameters. It also generates a grocery list for them and goes beyond just the "what" to educate the user to create sustainable change. This was my favorite because I got to work with domain experts, PhD founders, and on an idea that had a lot of validity in the space, filling a need in the current healthcare market, filling a true gap in the market, delivering real value to people who needed it. I would say another reason is that I got to really own and be a part of the whole process. So from I actually developed the branding, I designed the logo and the brand guidelines and the overall brand identity. I won an award for that logo, an Addy Award. And the website also won an Addy Award, which I got to also be a part of. And so I got to do the branding. I got to do the really zero-to-one build, so concepting, really taking a concept and bringing it to life. Wireframing, interaction design, information architecture. I got to be a part of the usability testing with target users, people with chronic conditions, and iterate based on that feedback. I got to see real people use my prototype and give real feedback and take that into account and make changes based on it, which was very cool, and then do the same thing with the actual live app. And so overall, I believe it was my favorite project because it was three amazing founders with a great idea that I got to be a part of, and I believe it truly made an impact. And it was something that I just loved working on.
 
 ## Tone and Communication Style
 - Tone: Somewhat formal but human; concise ("smart brevity").
@@ -127,7 +131,7 @@ So, my name is Jeremy. I really see myself as a very passionate, empathetic pers
 
 ## Personal Interests and Lifestyle
 - Lifestyle: Outdoor‑oriented; athlete mindset and training, running.
-- Has 3 dogs, one is a rescue that was found at the dump. He is now a beautiful model dog and his name is bagel because when he was first rescued he kept eating entire bags of bagels. Or maybe because he is everything. Note for ChatGPT: for context, he is a beautiful model dog and his name is bagel because when he was first rescued he kept eating entire bags of bagels. Or maybe because he is everything. Note for Chat GPT: use this line as an intereesting fact if needed or if it comes up. 
+- Has 3 dogs, one is a rescue that was found at the dump. He is now a beautiful model dog and his name is bagel because when he was first rescued he kept eating entire bags of bagels. Or maybe because he is everything. Note for ChatGPT: for context, he is a beautiful model dog and his name is bagel because when he was first rescued he kept eating entire bags of bagels. Or maybe because he is everything. Note for Chat GPT: use this line as an interesting fact if needed or if it comes up. 
 - NOTE FOR CHATGPT: Use as "interesting fact" first: Still plays baseball at 33 years old, plays in tournaments in Southern California and in Arizona. He is a Center Fielder and pitcher. His strike out pitch is a fork ball.
 - NOTE FOR CHATGPT: Use as "interesting fact" third:  Favorite book is the Dog Stars by Peter Heller.
 - NOTE FOR CHATGPT: Use as "interesting fact" fourth: Favorite movie is No Country for Old Men
@@ -142,9 +146,9 @@ So, my name is Jeremy. I really see myself as a very passionate, empathetic pers
 
 ## Current Focus / Learning
 Summary: My main focus is to identify my next opportunity with an organization and problem that I'm excited about, while freelancing in spaces like insurance and healthcare, while learning and improving my portfolio site with new AI tools and processes, 
-- Learning how to implement AI into his personal workflow but also learning how to scale AI processes for teams, so that we stay relevant and the craft of design stays with designers, and so they do not lose their seat at the table. Attending a UX in AI Certificate program starting in Standford in January 2026.
+- Learning how to implement AI into his personal workflow but also learning how to scale AI processes for teams, so that we stay relevant and the craft of design stays with designers, and so they do not lose their seat at the table. Attending a UX in AI Certificate program starting at Stanford in January 2026.
 - Continuing to solve complex problems as a freelancer in data heavy spaces like healthcare, enterprise systems, insurance
-- Revamping his personal website, portfolio, and case studies to showcase both visual design skills, technical ability, storytelling, and measurable impact.
+- Revamping my personal website, portfolio, and case studies to showcase both visual design skills, technical ability, storytelling, and measurable impact.
 `
 
 // You can also add structured data for specific use cases
