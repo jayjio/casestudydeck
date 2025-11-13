@@ -1,35 +1,57 @@
-# Nuxt 3 Application
+# Portfolio Review Slide Deck
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+An interactive slide deck presentation built with Vue.js and Nuxt.js for portfolio reviews.
 
-## Setup
+## Features
 
-Make sure to install the dependencies:
+- 29 interactive slides with smooth transitions
+- Keyboard navigation (arrow keys)
+- Progress bar and slide counter
+- Responsive design
+- Custom typography and styling
+
+## Development
 
 ```bash
+# Install dependencies
 npm install
-```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
+# Start development server
 npm run dev
-```
 
-## Production
-
-Build the application for production:
-
-```bash
+# Build for production
 npm run build
+
+# Generate static files
+npm run generate
 ```
 
-Locally preview production build:
+## Deployment
 
-```bash
-npm run preview
+The static files are generated in `.output/public/` and can be deployed to:
+
+- **Vercel**: Drag and drop the `.output/public` folder
+- **Netlify**: Drag and drop the `.output/public` folder
+- **GitHub Pages**: Push to repo and enable Pages
+
+## Embedding in Webflow
+
+After deploying, embed the slide deck in Webflow using an iframe:
+
+```html
+<iframe 
+  src="https://your-deployed-url.vercel.app/portfolio-review" 
+  width="100%" 
+  height="900px" 
+  frameborder="0"
+  style="border: none; min-height: 900px;"
+  allowfullscreen
+></iframe>
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Project Structure
+
+- `pages/portfolio-review.vue` - Main slide deck page with slide data
+- `components/SlideDeck.vue` - Slide deck component with navigation
+- `public/images/` - Image assets
+- `public/fonts/` - Custom fonts

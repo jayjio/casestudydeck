@@ -16,15 +16,5 @@ export default defineNuxtConfig({
   nitro: {
     // Nitro automatically serves files from .output/public/
     // Widget files will be available at /widget/* after build
-    routeRules: {
-      '/api/chat': {
-        cors: true,
-        headers: {
-          'Access-Control-Allow-Methods': 'POST, OPTIONS, GET',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
-          'Access-Control-Max-Age': '86400'
-        }
-      }
-    }
   }
 })
